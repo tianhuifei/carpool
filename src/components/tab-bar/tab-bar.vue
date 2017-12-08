@@ -1,7 +1,17 @@
 <template>
   <div class="tab-bar">
-    <div class="tab-item"></div>
-    <div class="tab-item"></div>
+    <div class="tab-item">
+      <router-link to="/foo">
+        <span class="carpoll car-wode4"></span>
+        <span>2</span>
+      </router-link>
+    </div>
+    <div class="tab-item">
+      <router-link to="/foo">
+        <span class="carpoll car-wode4"></span>
+        <span>2</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -9,8 +19,8 @@
   export default {}
 </script>
 
-<style lang="scss">
-  @import "../../assets/css/base.scss";
+<style lang="scss" scoped>
+  @import "../../assets/css/base-color.scss";
   .tab-bar{
     height:50px;
     background-color:$tab-bar-bg-color;
