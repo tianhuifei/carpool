@@ -1,0 +1,33 @@
+//app背景色
+$app-bg-color:rgb(238, 238, 238);
+/***
+主题色
+**/
+$main-app-bg-color: #ff6600;
+//车找人 背景色
+$car-to-people-color:#1aad19;
+//人找车 背景色
+$people-to-car-color:#e64340;
+
+//基础文字色
+$basic-font-color:#858383;
+
+//过色期文字
+$past-font-color:#dedede;
+
+//导航背景色
+$tab-bar-bg-color:#f7f7f7;
+
+//导航栏激活与未激活
+//未激活
+$tab-color:#858383;
+//激活
+$tab-active-color:#ff6600;
+
+html,body{
+  padding:0;margin:0;
+}
+
+body{
+  background-color: $app-bg-color;
+}

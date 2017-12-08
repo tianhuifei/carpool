@@ -1,0 +1,14 @@
+@import "base-color";
+@import "reset";
+html,body{
+  min-height:100%;
+}
+html{
+  -webkit-text-size-adjust: 100%;
+}
+body{
+  min-height:100%;
+  padding-bottom:51px;
+}
+
+
