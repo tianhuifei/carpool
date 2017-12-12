@@ -1,5 +1,8 @@
 <template>
-    
+    <div class="slider">
+        <slot></slot>
+    </div>
+    <div class="dots"></div>
 </template>
 
 <script type="text/ecmascript-6">
