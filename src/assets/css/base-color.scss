@@ -1,33 +1,38 @@
 //app背景色
-$app-bg-color:rgb(238, 238, 238);
+$app-bg-color: rgb(238, 238, 238);
 /***
 主题色
 **/
 $app-color: #ff6600;
 //车找人 背景色
-$car-to-people-color:#1aad19;
+$car-to-people-color: #1aad19;
 //人找车 背景色
-$people-to-car-color:#e64340;
+$people-to-car-color: #e64340;
 
 //基础文字色
-$basic-font-color:#858383;
+$basic-font-color: #858383;
 
 //过色期文字
-$past-font-color:#dedede;
+$past-font-color: #dedede;
 
 //导航背景色
-$tab-bar-bg-color:#f7f7f7;
+$tab-bar-bg-color: #f7f7f7;
 
 //导航栏激活与未激活
 //未激活
-$tab-color:#858383;
+$tab-color: #858383;
 //激活
-$tab-active-color:#ff6600;
+$tab-active-color: #ff6600;
 
-html,body{
-  padding:0;margin:0;
+//灰色
+$color-light-grey-sss: #fcfcfc;
+//白色
+$color-white: #FFF;
+html, body {
+  padding: 0;
+  margin: 0;
 }
 
-body{
+body {
   background-color: $app-bg-color;
 }
