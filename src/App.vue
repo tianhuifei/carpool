@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <router-view/>
     <tab-bar></tab-bar>
   </div>
@@ -8,10 +7,12 @@
 
 <script type="text/ecmascript-6">
   import TabBar from 'components/tab-bar/tab-bar'
+  import Home from 'components/home/home'
 
   export default {
     components: {
-      TabBar
+      TabBar,
+      Home
     }
   }
 </script>
