@@ -1,7 +1,7 @@
 <template>
   <div class="tab-bar">
     <div class="tab-item" v-for="(item,index) in tabItem" @click="isActiveFn(index)">
-        <router-link class="needsclick" :class="{'active': isActive == index} " :to="item.to"  >
+        <router-link  :class="{'active': isActive == index} " :to="item.to"  >
           <span class="carpoll"  :class="item.className"></span>
 
           <span class="tab-text">{{ item.name }}</span>
@@ -22,7 +22,7 @@
           {
             className: 'car-shouye',
             name: '首页',
-            to: '/foo'
+            to: '/'
           },
           {
             className: 'car-wode4',
