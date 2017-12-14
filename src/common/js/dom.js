@@ -14,18 +14,17 @@ export function addClass(el, className) {
 
 export function removeClass(el, className) {
   if (!hasClass(el, className)) {
-    return;
+    return
   }
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
   el.className = el.className.replace(reg, ' ')
 }
 
 export function getData(el, name, val) {
-  let prefix = "data-"
+  let prefix = 'data-'
   if (val) {
     return el.setAttribute(prefix + name, val)
   }
 
   return el.getAttribute(prefix + name)
-
 }
