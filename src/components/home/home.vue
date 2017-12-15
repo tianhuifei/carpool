@@ -1,5 +1,6 @@
 <template>
   <div class="home-main">
+    <scroll>
     <div class="slide-wrapper">
       <div class="slide-content">
       <slide>
@@ -26,14 +27,17 @@
       </slide>
       </div>
     </div>
+    </scroll>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Slide from 'base/slide/slide'
+  import Scroll from 'base/scroll/scroll'
   export default {
     components: {
-      Slide
+      Slide,
+      Scroll
     }
   }
 </script>
