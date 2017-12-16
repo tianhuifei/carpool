@@ -1,11 +1,15 @@
 @import "reset";
-html,body{
-  min-height:100%;
+//app背景色
+$app-bg-color: rgb(238, 238, 238);
+html, body {
+  min-height: 100%;
 }
-html{
+
+html {
   -webkit-text-size-adjust: 100%;
 }
-body{
-  min-height:100%;
-  padding-bottom:51px;
+
+body {
+  min-height: 100%;
+  background: rgb(238, 238, 238);
 }
