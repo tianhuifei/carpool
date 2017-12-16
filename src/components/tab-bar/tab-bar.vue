@@ -1,9 +1,8 @@
 <template>
   <div class="tab-bar">
-    <div class="tab-item" v-for="(item,index) in tabItem" @click="isActiveFn(index)">
-        <router-link  :class="{'active': isActive == index} " :to="item.to"  >
+    <div class="tab-item" v-for="(item,index) in tabItem">
+        <router-link  :to="item.to"  >
           <span class="carpoll"  :class="item.className"></span>
-
           <span class="tab-text">{{ item.name }}</span>
         </router-link>
     </div>
@@ -32,17 +31,12 @@
         ]
       }
     },
-    methods: {
-      isActiveFn (index) {
-        console.log(index)
-        this.isActive = index
-      }
-    }
+    methods: {}
   }
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/css/base-color.scss";
+  @import "../../assets/css/base-standard";
   .tab-bar{
     height:50px;
     background-color:$tab-bar-bg-color;
@@ -62,13 +56,13 @@
         align-items: center;
         flex-direction: column;
         .carpoll{
-          font-size:20px;
+          font-size:24px;
         }
         .tab-text{
           font-size:12px;
           margin-top:5px;
         }
-        &.active span{
+        &.router-link-exact-active span{
           color:$app-color
         }
       }
