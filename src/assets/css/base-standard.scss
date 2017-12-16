@@ -1,5 +1,4 @@
-//app背景色
-$app-bg-color: rgb(238, 238, 238);
+
 /***
 主题色
 **/
@@ -28,11 +27,6 @@ $tab-active-color: #ff6600;
 $color-light-grey-sss: #fcfcfc;
 //白色
 $color-white: #FFF;
-html, body {
-  padding: 0;
-  margin: 0;
-}
 
-body {
-  background-color: $app-bg-color;
-}
+//tab-bar-height
+$tab-bar-height: 52px;
