@@ -144,7 +144,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "~assets/css/base-color";
+  @import "~assets/css/base-standard";
 
   .slider {
     min-height: 1px;
