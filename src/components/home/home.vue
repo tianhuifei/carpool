@@ -28,6 +28,17 @@
             </slide>
           </div>
         </div>
+        <div class="main-search-box">
+          <div class="start-address">
+            <input type="text">
+          </div>
+          <div class="end-address">
+            <input type="text">
+          </div>
+          <div class="search-btn-box">
+
+          </div>
+        </div>
       </div>
     </scroll>
   </div>
@@ -72,6 +83,25 @@
       left: 0;
       width: 100%;
       height: 100%;
+    }
+  }
+
+  .main-search-box{
+    margin-top:-10px;
+    display: flex;
+    background:$app-color;
+    .start-address,.end-address{
+      flex:1;
+      padding:10px 0;
+      input{
+        width:100%;
+        box-sizing: content-box;
+        border-radius:15px;
+        border:none;
+        outline: none;
+        height:25px;
+        padding:0 5px;
+      }
     }
   }
 </style>
