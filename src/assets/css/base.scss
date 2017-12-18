@@ -1,4 +1,5 @@
 @import "reset";
+@import "base-standard";
 //app背景色
 $app-bg-color: rgb(238, 238, 238);
 html, body {
@@ -11,4 +12,8 @@ html {
 body {
   min-height: 100%;
   background: rgb(238, 238, 238);
+}
+
+.text-white {
+  color:$color-white !important;
 }
