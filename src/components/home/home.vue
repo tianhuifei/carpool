@@ -30,10 +30,10 @@
         </div>
         <div class="main-search-box">
           <div class="start-address">
-            <input type="text">
+
           </div>
           <div class="end-address">
-            <input type="text">
+
           </div>
           <div class="search-btn-box">
 
@@ -91,16 +91,18 @@
     display: flex;
     background:$app-color;
     .start-address,.end-address{
-      flex:1;
+      flex:2;
       padding:10px 0;
       input{
-        width:100%;
-        box-sizing: content-box;
-        border-radius:15px;
-        border:none;
-        outline: none;
-        height:25px;
-        padding:0 5px;
+
+      }
+    }
+    .search-btn-box{
+      flex: 1;
+      display: flex;
+      Button{
+        justify-content: center;
+        align-items: center;
       }
     }
   }
