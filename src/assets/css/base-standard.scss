@@ -29,3 +29,11 @@ $color-white: #FFF;
 
 //tab-bar-height
 $tab-bar-height: 52px;
+
+
+//flex 垂直水平居中
+@mixin justify-items{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
