@@ -46,12 +46,18 @@
 
         <!--查找，发布-->
         <div class="search-query-publish">
-          <div> <x-button class="car-to-people" :mini="true" type="default">车找人</x-button> </div>
-          <div> <x-button class="people-to-car" :mini="true" type="default">人找车</x-button> </div>
-          <div> <x-button class="publish-btn" :mini="true" type="default">发布</x-button> </div>
+          <div>
+            <x-button class="car-to-people" :mini="true" type="default">车找人</x-button>
+          </div>
+          <div>
+            <x-button class="people-to-car" :mini="true" type="default">人找车</x-button>
+          </div>
+          <div>
+            <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
+          </div>
         </div>
         <!--查找，发布-->
-
+        <publish-list></publish-list>
 
       </div>
     </scroll>
@@ -62,19 +68,48 @@
 <script type="text/ecmascript-6">
   import Slide from 'base/slide/slide'
   import Scroll from 'base/scroll/scroll'
-  import { XButton } from 'vux'
+  import {XButton} from 'vux'
+  import PublishList from 'components/publish-list/publish-list'
 
   export default {
     components: {
       Slide,
       Scroll,
-      XButton
+      XButton,
+      PublishList
+    },
+    data() {
+      return {
+        publishList: []
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.queryAll()
+      }, 20)
+    },
+    methods: {
+      queryAll() {
+        this.$http({
+          method: 'post',
+          url: '/assets/json/queryAll.json',
+          data: {
+            'condition.currentPage': 0,
+            'condition.numsPerPage': 5
+          }
+        }).then((res) => {
+          console.log(res, '成功')
+        }).catch((err) => {
+          console.log(err, '失败')
+        })
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
+
   .home-main {
     position: fixed;
     top: 0;
@@ -102,56 +137,57 @@
     }
   }
 
-  .main-search-box{
-    margin-bottom:5px;
-    width:100%;
-    margin-top:-10px;
+  .main-search-box {
+    margin-bottom: 5px;
+    width: 100%;
+    margin-top: -10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:$app-color;
-    .start-address,.end-address{
-      flex:3;
-      padding:8px 5px;
-      input{
-        border:0;
+    background: $app-color;
+    .start-address, .end-address {
+      flex: 3;
+      padding: 8px 5px;
+      input {
+        border: 0;
         outline: none;
-        width:100%;
-        border-radius:10px;
-        height:25px;
-        padding:0 7px;
+        width: 100%;
+        border-radius: 10px;
+        height: 25px;
+        padding: 0 7px;
         box-sizing: border-box;
-        font-size:12px;
+        font-size: 12px;
       }
     }
-    .search-btn-box{
+    .search-btn-box {
       text-align: center;
       flex: 2;
-      font-size:14px;
-      color:$color-white;
-      line-height:1.5;
+      font-size: 14px;
+      color: $color-white;
+      line-height: 1.5;
     }
   }
-  .search-query-publish{
-    height:40px;
-    background-color:$color-white;
+
+  .search-query-publish {
+    height: 40px;
+    background-color: $color-white;
     margin: 5px 0;
-    display:flex;
+    display: flex;
     @include justify-items;
-    &>div{
+    & > div {
       flex: 1;
       @include justify-items;
-      button{
-        color:$color-white;
+      button {
+        color: $color-white;
       }
-      button.car-to-people{
-        background-color:$car-to-people-color;
+      button.car-to-people {
+        background-color: $car-to-people-color;
       }
-      button.people-to-car{
-        background-color:$people-to-car-color;
+      button.people-to-car {
+        background-color: $people-to-car-color;
       }
-      button.publish-btn{
-        color:#333;
+      button.publish-btn {
+        color: #333;
       }
     }
   }
