@@ -1,8 +1,8 @@
 import * as types from './mutation-types'
 
 const mutations = {
-  [types.SEET_PUBLISHLIST](state, list) {
-    state.publishList = list
+  [types.SET_PUBLISINFO](state, info) {
+    state.publishInfo = info
   }
 }
 

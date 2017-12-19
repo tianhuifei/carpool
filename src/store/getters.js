@@ -1,1 +1,1 @@
-export const publishList = state => state.publishList
+export const publishInfo = state => state.publishInfo

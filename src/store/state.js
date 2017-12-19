@@ -1,5 +1,5 @@
 const state = {
-  publishList: []
+  publishInfo: {}
 }
 
 export default state
