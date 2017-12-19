@@ -36,7 +36,7 @@
 
           </div>
           <div class="search-btn-box">
-
+            <x-button type="default" :plain="true" :mini="true">搜索</x-button>
           </div>
         </div>
       </div>
@@ -48,11 +48,13 @@
 <script type="text/ecmascript-6">
   import Slide from 'base/slide/slide'
   import Scroll from 'base/scroll/scroll'
+  import { XButton } from 'vux'
 
   export default {
     components: {
       Slide,
-      Scroll
+      Scroll,
+      XButton
     }
   }
 </script>

@@ -6,12 +6,9 @@ import router from './router'
 import 'assets/css/base.scss'
 import 'assets/css/icon.scss'
 import fastclick from 'fastclick'
-import MniUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
 
 fastclick.attach(document.body)
 Vue.config.productionTip = false
-Vue.use(MniUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
