@@ -28,17 +28,31 @@
             </slide>
           </div>
         </div>
+
+
+        <!-- 出发地，目的地 -->
         <div class="main-search-box">
           <div class="start-address">
-
+            <input placeholder="始发地" type="text">
           </div>
           <div class="end-address">
-
+            <input placeholder="目的地" type="text">
           </div>
           <div class="search-btn-box">
-            <x-button type="default" :plain="true" :mini="true">搜索</x-button>
+            搜索
           </div>
         </div>
+        <!-- 出发地，目的地 -->
+
+        <!--查找，发布-->
+        <div class="search-query-publish">
+          <div> <x-button class="car-to-people" :mini="true" type="default">车找人</x-button> </div>
+          <div> <x-button class="people-to-car" :mini="true" type="default">人找车</x-button> </div>
+          <div> <x-button class="publish-btn" :mini="true" type="default">发布</x-button> </div>
+        </div>
+        <!--查找，发布-->
+
+
       </div>
     </scroll>
   </div>
@@ -89,23 +103,57 @@
   }
 
   .main-search-box{
+    margin-bottom:5px;
+    width:100%;
     margin-top:-10px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     background:$app-color;
     .start-address,.end-address{
-      flex:2;
-      padding:10px 0;
+      flex:3;
+      padding:8px 5px;
       input{
-
+        border:0;
+        outline: none;
+        width:100%;
+        border-radius:10px;
+        height:25px;
+        padding:0 7px;
+        box-sizing: border-box;
+        font-size:12px;
       }
     }
     .search-btn-box{
+      text-align: center;
+      flex: 2;
+      font-size:14px;
+      color:$color-white;
+      line-height:1.5;
+    }
+  }
+  .search-query-publish{
+    height:40px;
+    background-color:$color-white;
+    margin: 5px 0;
+    display:flex;
+    @include justify-items;
+    &>div{
       flex: 1;
-      display: flex;
-      Button{
-        justify-content: center;
-        align-items: center;
+      @include justify-items;
+      button{
+        color:$color-white;
+      }
+      button.car-to-people{
+        background-color:$car-to-people-color;
+      }
+      button.people-to-car{
+        background-color:$people-to-car-color;
+      }
+      button.publish-btn{
+        color:#333;
       }
     }
   }
+
 </style>
