@@ -57,7 +57,7 @@
           </div>
         </div>
         <!--查找，发布-->
-        <publish-list></publish-list>
+        <publish-list :list="publishList"></publish-list>
 
       </div>
     </scroll>
@@ -91,14 +91,13 @@
     methods: {
       queryAll() {
         this.$http({
-          method: 'post',
-          url: '/assets/json/queryAll.json',
-          data: {
-            'condition.currentPage': 0,
-            'condition.numsPerPage': 5
-          }
+          method: 'GET',
+          url: '/static/json/queryAll.json'
         }).then((res) => {
-          console.log(res, '成功')
+          let result = res.data.result
+          if (result) {
+            this.publishList = result
+          }
         }).catch((err) => {
           console.log(err, '失败')
         })

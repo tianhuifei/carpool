@@ -1,6 +1,6 @@
 <template>
   <div class="result-content">
-    <div class="" v-for="item in list"></div>
+    <div class="" v-for="(item,index) in list"></div>
 
   </div>
 </template>
