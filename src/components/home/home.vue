@@ -70,6 +70,7 @@
   import Scroll from 'base/scroll/scroll'
   import {XButton} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
+  import {getQueryALl} from '../../api/resultList'
 
   export default {
     components: {
@@ -90,16 +91,14 @@
     },
     methods: {
       queryAll() {
-        this.$http({
-          method: 'GET',
-          url: '/static/json/queryAll.json'
-        }).then((res) => {
+        getQueryALl().then((res) => {
           let result = res.data.result
           if (result) {
             this.publishList = result
           }
+          console.log(res)
         }).catch((err) => {
-          console.log(err, '失败')
+          console.log(err)
         })
       }
     }
