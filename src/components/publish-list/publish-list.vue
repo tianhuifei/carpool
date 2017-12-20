@@ -3,30 +3,31 @@
     <div class="result-item" v-for="(item,index) in list">
       <div class="result-left">
         <div class="result-address">
-          <span class="car-for-people">车找人</span>
-          <p><span>北京</span>-<span>邯郸</span> </p>
+          <span :class="item.publishType ? 'car-for-people' : 'people-for-car'">车找人</span>
+          <p><span>{{ item.startAddress }}</span>-<span>{{ item.endAddres }}</span> </p>
         </div>
         <div class="result-date">
           发车时间：
           <span class="start-time">
-            12月31日（周日） 12:00
+            {{ item.publishTime }}
           </span>
         </div>
         <div class="result-info">
           <div class="show-info">
-            5空位
+            {{ item.vacancy }}空位
           </div>
           <div class="show-see">
-            5 <span class=" carpoll car-see"></span>
+            {{ item.seeNum }} <span class=" carpoll car-see"></span>
           </div>
         </div>
       </div>
       <div class="result-right">
+        <a :href="'tel:' + item.contactsPhone "></a>
         <div class="result-phone">
           <span class="carpoll car-phone"></span>
         </div>
         <div class="add-time">
-          今天发布
+          {{ item.publishTime }}
         </div>
       </div>
     </div>
