@@ -17,3 +17,10 @@ body {
 .text-white {
   color:$color-white !important;
 }
+
+.car-for-people{
+  background-color:$car-to-people-color;
+}
+.people-for-car{
+  background-color:$people-to-car-color;
+}
