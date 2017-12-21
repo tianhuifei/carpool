@@ -92,11 +92,11 @@
     methods: {
       queryAll() {
         getQueryALl().then((res) => {
+          console.log(res)
           let result = res.data.result
           if (result) {
             this.publishList = result
           }
-          console.log(res)
         }).catch((err) => {
           console.log(err)
         })
