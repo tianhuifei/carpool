@@ -2,33 +2,7 @@
   <div class="home-main">
     <scroll class="home-main-content">
       <div>
-        <div class="slide-wrapper">
-          <div class="slide-content">
-            <slide>
-              <div class="">
-                <a href="javascript:void(0);">
-                  <img src="http://y.gtimg.cn/music/photo_new/T003R720x288M000001ceytP1fMEiv.jpg" alt="">
-                </a>
-              </div>
-              <div class="">
-                <a href="javascript:void(0);">
-                  <img src="http://y.gtimg.cn/music/photo_new/T003R720x288M000002z8Lbj3UmMDb.jpg" alt="">
-                </a>
-              </div>
-              <div class="">
-                <a href="javascript:void(0);">
-                  <img src="http://y.gtimg.cn/music/photo_new/T003R720x288M0000048zX052OMIaE.jpg" alt="">
-                </a>
-              </div>
-              <div class="">
-                <a href="javascript:void(0);">
-                  <img src="http://y.gtimg.cn/music/photo_new/T003R720x288M000003ZY2ys3b5RFT.jpg" alt="">
-                </a>
-              </div>
-            </slide>
-          </div>
-        </div>
-
+        <swiper height="130px" :show-desc-mask="false" :auto="true" :loop="true" :list="swiper"></swiper>
 
         <!-- 出发地，目的地 -->
         <div class="main-search-box">
@@ -66,22 +40,43 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Slide from 'base/slide/slide'
   import Scroll from 'base/scroll/scroll'
-  import {XButton} from 'vux'
+  import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
   import {getQueryALl} from '../../api/resultList'
 
   export default {
     components: {
-      Slide,
       Scroll,
       XButton,
-      PublishList
+      PublishList,
+      Swiper
     },
     data() {
       return {
-        publishList: []
+        publishList: [],
+        swiper: [
+          {
+            url: 'javascript:void(0);',
+            img: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001ceytP1fMEiv.jpg',
+            title: ''
+          },
+          {
+            url: 'javascript:void(0);',
+            img: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000002z8Lbj3UmMDb.jpg',
+            title: ''
+          },
+          {
+            url: 'javascript:void(0);',
+            img: 'http://y.gtimg.cn/music/photo_new/T003R720x288M0000048zX052OMIaE.jpg',
+            title: ''
+          },
+          {
+            url: 'javascript:void(0);',
+            img: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000003ZY2ys3b5RFT.jpg',
+            title: ''
+          }
+        ]
       }
     },
     mounted() {
@@ -118,27 +113,10 @@
       overflow: hidden;
     }
   }
-
-  .slide-wrapper {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 40%;
-    margin-bottom: 10px;
-    overflow: hidden;
-    .slide-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
   .main-search-box {
     margin-bottom: 5px;
     width: 100%;
-    margin-top: -10px;
+    margin-top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
