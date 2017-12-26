@@ -1,7 +1,7 @@
 <template>
   <div class="result-content">
     <div class="result-item" v-for="(item,index) in list">
-      <div class="result-left">
+      <router-link class="result-left" tag="div" to="/">
         <div class="result-address">
           <span :class="item.publishType ? 'car-for-people' : 'people-for-car'">车找人</span>
           <p><span>{{ item.startAddress }}</span>-<span>{{ item.endAddres }}</span> </p>
@@ -20,7 +20,7 @@
             {{ item.seeNum }} <span class=" carpoll car-see"></span>
           </div>
         </div>
-      </div>
+      </router-link>
       <div class="result-right">
         <a :href="'tel:' + item.contactsPhone "></a>
         <div class="result-phone">
@@ -55,7 +55,7 @@
   background: $color-white;
   margin-bottom:5px;
   @include justify-items;
-  padding:5px 8px;
+  padding:5px 0 5px 8px;
   .result-left{
     flex: 3;
     flex-direction:column;
@@ -73,7 +73,7 @@
         display:block;
         position: absolute;
         left:0;
-        top:-2px;
+        top:-1px;
         font-size:12px;
         color:$color-white;
         padding:2px 3px;
@@ -127,6 +127,7 @@
     }
   }
   .result-right{
+    padding:0 5px;
     flex: 1;
     align-self: stretch;
     border-left:1px solid $past-font-color;
