@@ -1,39 +1,36 @@
 <template>
   <div class="home-main">
-    <scroll class="home-main-content">
-      <div>
-        <swiper height="130px" :show-desc-mask="false" :auto="true" :loop="true" :list="swiper"></swiper>
+    <scroll ref="scroll" @pullingDown="onPullingDown" :pullDownRefresh="pullDownRefreshObj" class="">
+      <swiper height="130px" :show-desc-mask="false" :auto="true" :loop="true" :list="swiper"></swiper>
 
-        <!-- 出发地，目的地 -->
-        <div class="main-search-box">
-          <div class="start-address">
-            <input placeholder="始发地" type="text">
-          </div>
-          <div class="end-address">
-            <input placeholder="目的地" type="text">
-          </div>
-          <div class="search-btn-box">
-            搜索
-          </div>
+      <!-- 出发地，目的地 -->
+      <div class="main-search-box">
+        <div class="start-address">
+          <input placeholder="始发地" type="text">
         </div>
-        <!-- 出发地，目的地 -->
-
-        <!--查找，发布-->
-        <div class="search-query-publish">
-          <div>
-            <x-button class="car-to-people" :mini="true" type="default">车找人</x-button>
-          </div>
-          <div>
-            <x-button class="people-to-car" :mini="true" type="default">人找车</x-button>
-          </div>
-          <div>
-            <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
-          </div>
+        <div class="end-address">
+          <input placeholder="目的地" type="text">
         </div>
-        <!--查找，发布-->
-        <publish-list :list="publishList"></publish-list>
-
+        <div class="search-btn-box">
+          搜索
+        </div>
       </div>
+      <!-- 出发地，目的地 -->
+
+      <!--查找，发布-->
+      <div class="search-query-publish">
+        <div>
+          <x-button class="car-to-people" :mini="true" type="default">车找人</x-button>
+        </div>
+        <div>
+          <x-button class="people-to-car" :mini="true" type="default">人找车</x-button>
+        </div>
+        <div>
+          <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
+        </div>
+      </div>
+      <!--查找，发布-->
+      <publish-list @selectPublish="select" :list="publishList"></publish-list>
     </scroll>
   </div>
 
@@ -44,6 +41,7 @@
   import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
   import {getQueryALl} from '../../api/resultList'
+  import {mapMutations} from 'vuex'
 
   export default {
     components: {
@@ -76,7 +74,12 @@
             img: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000003ZY2ys3b5RFT.jpg',
             title: ''
           }
-        ]
+        ],
+        pullDownRefreshObj: {
+          threshold: parseInt(50),
+          stop: parseInt(40),
+          txt: '刷新成功'
+        }
       }
     },
     mounted() {
@@ -95,7 +98,28 @@
         }).catch((err) => {
           console.log(err)
         })
-      }
+      },
+      select(item) {
+        this.$router.push({
+          path: '/detail/' + item.publishId
+        })
+        this.setPublishInfo(item)
+      },
+      onPullingDown() {
+        console.log('刷新')
+        setTimeout(() => {
+          if (Math.random() > 0.5) {
+            // 如果有新数据
+            this.$refs.scroll.forceUpdate(true)
+          } else {
+            // 如果没有新数据
+            this.$refs.scroll.forceUpdate()
+          }
+        }, 2000)
+      },
+      ...mapMutations({
+        setPublishInfo: 'SET_PUBLISINFO'
+      })
     }
   }
 </script>
@@ -113,6 +137,7 @@
       overflow: hidden;
     }
   }
+
   .main-search-box {
     margin-bottom: 5px;
     width: 100%;
