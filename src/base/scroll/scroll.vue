@@ -275,6 +275,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../../assets/css/base-standard";
   .list-wrapper {
     position: absolute;
     left: 0;
@@ -310,6 +311,10 @@
     transition: all;
     .after-trigger {
       margin-top: 10px;
+      span{
+        font-size:12px;
+        color:$basic-font-color;
+      }
     }
   }
 

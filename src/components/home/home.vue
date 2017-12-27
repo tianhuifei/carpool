@@ -88,15 +88,19 @@
       }, 20)
     },
     methods: {
-      queryAll() {
+      queryAll(pullFlag) {
         getQueryALl().then((res) => {
-          console.log(res)
           let result = res.result
           if (result) {
             this.publishList = result
           }
-        }).catch((err) => {
-          console.log(err)
+          if (pullFlag) {
+            this.$refs.scroll.forceUpdate(pullFlag)
+          }
+        }).catch(() => {
+          if (pullFlag) {
+            this.$refs.scroll.forceUpdate()
+          }
         })
       },
       select(item) {
@@ -106,16 +110,9 @@
         this.setPublishInfo(item)
       },
       onPullingDown() {
-        console.log('刷新')
         setTimeout(() => {
-          if (Math.random() > 0.5) {
-            // 如果有新数据
-            this.$refs.scroll.forceUpdate(true)
-          } else {
-            // 如果没有新数据
-            this.$refs.scroll.forceUpdate()
-          }
-        }, 2000)
+          this.queryAll(true)
+        }, 1000)
       },
       ...mapMutations({
         setPublishInfo: 'SET_PUBLISINFO'
