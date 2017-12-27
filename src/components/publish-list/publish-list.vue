@@ -35,7 +35,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapMutations} from 'vuex'
+  // import {mapMutations} from 'vuex'
 
   export default {
     props: {
@@ -49,14 +49,8 @@
     },
     methods: {
       selectPublish(item) {
-        this.$router.push({
-          path: '/detail/' + item.publishId
-        })
-        this.setPublishInfo(item)
-      },
-      ...mapMutations({
-        setPublishInfo: 'SET_PUBLISINFO'
-      })
+        this.$emit('selectPublish', item)
+      }
     }
   }
 </script>
