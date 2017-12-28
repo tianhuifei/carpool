@@ -3,7 +3,7 @@
     <div class="result-item" v-for="(item,index) in list">
       <div class="result-left" @click="selectPublish(item)">
         <div class="result-address">
-          <span :class="item.publishType ? 'car-for-people' : 'people-for-car'">车找人</span>
+          <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
           <p><span>{{ item.startAddress }}</span>-<span>{{ item.endAddres }}</span></p>
         </div>
         <div class="result-date">
