@@ -6,12 +6,12 @@
       <!-- 出发地，目的地 -->
       <div class="main-search-box">
         <div class="start-address">
-          <input placeholder="始发地" type="text">
+          <input placeholder="始发地" v-model="startAddress" type="text">
         </div>
         <div class="end-address">
-          <input placeholder="目的地" type="text">
+          <input placeholder="目的地" v-model="endAddress" type="text">
         </div>
-        <div class="search-btn-box">
+        <div class="search-btn-box" @click="queryStartEnd">
           搜索
         </div>
       </div>
@@ -40,7 +40,7 @@
   import Scroll from 'base/scroll/scroll'
   import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
-  import {getQueryALl} from '../../api/resultList'
+  import {getQueryALl, queryStartEnd} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
 
@@ -54,6 +54,8 @@
     data() {
       return {
         publishList: [],
+        startAddress: '',
+        endAddress: '',
         swiper: [
           {
             url: 'javascript:void(0);',
@@ -93,7 +95,6 @@
         getQueryALl().then((res) => {
           let result = res.result
           if (result) {
-            console.log(result)
             this.publishList = this._normalizePublishInfo(result)
           }
           if (pullFlag) {
@@ -106,7 +107,6 @@
         })
       },
       select(item) {
-        this.publishList[this.publishList.indexOf(item)].seeNum += 1
         this.$router.push({
           path: '/detail/' + item.publishId
         })
@@ -117,12 +117,29 @@
           this.queryAll(true)
         }, 1000)
       },
+      queryStartEnd() {
+        let start = this.startAddress
+        let end = this.endAddress
+        if (!start) {
+          return
+        }
+        if (!end) {
+          return
+        }
+        queryStartEnd(this.startAddress, this.endAddress).then((res) => {
+          let result = res.result
+          if (result) {
+            this.publishList = this._normalizePublishInfo(result)
+          }
+        }).catch(() => {
+
+        })
+      },
       _normalizePublishInfo(list) {
         let publiObj = []
         list.forEach((item) => {
           publiObj.push(createPublishInfo(item))
         })
-        console.log(publiObj)
         return publiObj
       },
       ...mapMutations({
