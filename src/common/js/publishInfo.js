@@ -17,22 +17,23 @@ export default class PublishInfo {
     this.carNumber = carNumber
   }
 }
-export function createPublishInfo (obj) {
+
+export function createPublishInfo(obj) {
   return new PublishInfo({
-    openId : obj.openId,
-    publishId : obj.publishId,
-    contacts : obj.contacts,
-    startAddress : obj.startAddress,
-    endAddres : obj.endAddres,
-    contactsPhone : obj.contactsPhone,
-    publishType : obj.publishType,
-    publishTime : obj.publishTime,
-    startDate : obj.startDate,
-    startTime : obj.startTime,
-    vacancy : obj.vacancy,
-    remarks : obj.remarks,
-    seeNum : obj.seeNum,
-    becomeDue : obj.becomeDue,
-    carNumber : obj.carNumber
+    openId: obj.openId,
+    publishId: obj.publishId,
+    contacts: obj.contacts,
+    startAddress: obj.startAddress,
+    endAddres: obj.endAddres,
+    contactsPhone: obj.contactsPhone,
+    publishType: obj.publishType,
+    publishTime: obj.publishTime,
+    startDate: obj.startDate,
+    startTime: obj.startTime,
+    vacancy: obj.vacancy,
+    remarks: obj.remarks,
+    seeNum: obj.seeNum,
+    becomeDue: obj.becomeDue,
+    carNumber: obj.carNumber
   })
 }
