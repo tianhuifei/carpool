@@ -42,6 +42,7 @@
   import PublishList from 'components/publish-list/publish-list'
   import {getQueryALl} from '../../api/resultList'
   import {mapMutations} from 'vuex'
+  import {createPublishInfo} from '../../common/js/publishInfo'
 
   export default {
     components: {
@@ -92,7 +93,8 @@
         getQueryALl().then((res) => {
           let result = res.result
           if (result) {
-            this.publishList = result
+            console.log(result)
+            this.publishList = this._normalizePublishInfo(result)
           }
           if (pullFlag) {
             this.$refs.scroll.forceUpdate(pullFlag)
@@ -104,6 +106,7 @@
         })
       },
       select(item) {
+        this.publishList[this.publishList.indexOf(item)].seeNum += 1
         this.$router.push({
           path: '/detail/' + item.publishId
         })
@@ -113,6 +116,14 @@
         setTimeout(() => {
           this.queryAll(true)
         }, 1000)
+      },
+      _normalizePublishInfo(list) {
+        let publiObj = []
+        list.forEach((item) => {
+          publiObj.push(createPublishInfo(item))
+        })
+        console.log(publiObj)
+        return publiObj
       },
       ...mapMutations({
         setPublishInfo: 'SET_PUBLISINFO'
