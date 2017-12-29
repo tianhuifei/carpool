@@ -20,10 +20,10 @@
       <!--查找，发布-->
       <div class="search-query-publish">
         <div>
-          <x-button class="car-to-people" :mini="true" type="default">车找人</x-button>
+          <x-button class="car-to-people" @click.native="queryTypeList"  :mini="true" type="default">车找人 </x-button>
         </div>
         <div>
-          <x-button class="people-to-car" :mini="true" type="default">人找车</x-button>
+          <x-button class="people-to-car" @click.native="queryTypeList" :mini="true" type="default">人找车 </x-button>
         </div>
         <div>
           <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
@@ -40,7 +40,7 @@
   import Scroll from 'base/scroll/scroll'
   import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
-  import {getQueryALl, queryStartEnd} from '../../api/resultList'
+  import {getQueryALl, queryStartEnd, queryPublishType} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
 
@@ -134,6 +134,9 @@
         }).catch(() => {
 
         })
+      },
+      queryTypeList(type) {
+        queryPublishType(1)
       },
       _normalizePublishInfo(list) {
         let publiObj = []
