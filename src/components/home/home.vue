@@ -1,6 +1,8 @@
 <template>
   <div class="home-main">
-    <scroll ref="scroll" @pullingDown="onPullingDown" @pullingUp="onPullingUp" :pullUpLoad="pullUpLoadObj" :pullDownRefresh="pullDownRefreshObj" class="">
+    <scroll :data="publishList" ref="scroll" @pullingDown="onPullingDown" @pullingUp="onPullingUp"
+            :pullUpLoad="pullUpLoadObj"
+            :pullDownRefresh="pullDownRefreshObj" class="">
       <swiper height="130px" :show-desc-mask="false" :auto="true" :loop="true" :list="swiper"></swiper>
 
       <!-- 出发地，目的地 -->
@@ -40,7 +42,7 @@
   import Scroll from 'base/scroll/scroll'
   import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
-  import {getQueryALl, queryStartEnd, queryPublishType} from '../../api/resultList'
+  import {getQueryALl, queryStartEnd, queryPublishType, pullUp} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
 
@@ -56,6 +58,8 @@
         publishList: [],
         startAddress: '',
         endAddress: '',
+        publishType: -1,
+        currentPageIndex: 0,
         swiper: [
           {
             url: 'javascript:void(0);',
@@ -99,6 +103,8 @@
     },
     methods: {
       queryAll(pullFlag) {
+        this.publishType = null
+        this.currentPageIndex = 0
         getQueryALl().then((res) => {
           this._normalizeResultList(res)
           if (pullFlag) {
@@ -117,25 +123,25 @@
         this.setPublishInfo(item)
       },
       onPullingDown() {
+        this.publishType = -1
+        this.currentPageIndex = 0
         setTimeout(() => {
           this.queryAll(true)
         }, 1000)
       },
       onPullingUp() {
+        this.currentPageIndex += 5
         setTimeout(() => {
-          if (this._isDestroyed) {
-            return
-          }
-          if (Math.random() > 0.5) {
-            // 如果有新数据
+          pullUp(this.publishType, this.currentPageIndex, this.startAddress, this.endAddres).then((res) => {
+            this._normalizeResultList(res, true)
+          }).catch(() => {
             this.$refs.scroll.forceUpdate()
-          } else {
-            // 如果没有新数据
-            this.$refs.scroll.forceUpdate()
-          }
+          })
         }, 1500)
       },
       queryStartEnd() {
+        this.publishType = -1
+        this.currentPageIndex = 0
         let start = this.startAddress
         let end = this.endAddress
         if (!start) {
@@ -154,9 +160,12 @@
         })
       },
       queryTypeList(type) {
+        this.publishType = type
+        this.currentPageIndex = 0
         if (event._constructed) {
           return
         }
+        this.publishType = type
         queryPublishType(type).then((res) => {
           this._normalizeResultList(res)
         }).catch(() => {
@@ -169,10 +178,14 @@
         })
         return publiObj
       },
-      _normalizeResultList(res) {
+      _normalizeResultList(res, type) {
         let result = res.result
         if (result) {
-          this.publishList = this._normalizePublishInfo(result)
+          if (type) {
+            this.publishList.concat(this._normalizePublishInfo(result))
+          } else {
+            this.publishList = this._normalizePublishInfo(result)
+          }
         }
       },
       ...mapMutations({
