@@ -1,6 +1,6 @@
 <template>
   <div class="home-main">
-    <scroll ref="scroll" @pullingDown="onPullingDown" :pullDownRefresh="pullDownRefreshObj" class="">
+    <scroll ref="scroll" @pullingDown="onPullingDown" @pullingUp="onPullingUp" :pullUpLoad="pullUpLoadObj" :pullDownRefresh="pullDownRefreshObj" class="">
       <swiper height="130px" :show-desc-mask="false" :auto="true" :loop="true" :list="swiper"></swiper>
 
       <!-- 出发地，目的地 -->
@@ -20,10 +20,10 @@
       <!--查找，发布-->
       <div class="search-query-publish">
         <div>
-          <x-button class="car-to-people" @click.native="queryTypeList"  :mini="true" type="default">车找人 </x-button>
+          <x-button class="car-to-people" @click.native="queryTypeList(0)" :mini="true" type="default">车找人</x-button>
         </div>
         <div>
-          <x-button class="people-to-car" @click.native="queryTypeList" :mini="true" type="default">人找车 </x-button>
+          <x-button class="people-to-car" @click.native="queryTypeList(1)" :mini="true" type="default">人找车</x-button>
         </div>
         <div>
           <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
@@ -82,6 +82,13 @@
           threshold: parseInt(50),
           stop: parseInt(40),
           txt: '刷新成功'
+        },
+        pullUpLoadObj: {
+          threshold: parseInt(50),
+          txt: {
+            more: '加载更多',
+            noMore: '已经到底了！'
+          }
         }
       }
     },
@@ -93,10 +100,7 @@
     methods: {
       queryAll(pullFlag) {
         getQueryALl().then((res) => {
-          let result = res.result
-          if (result) {
-            this.publishList = this._normalizePublishInfo(result)
-          }
+          this._normalizeResultList(res)
           if (pullFlag) {
             this.$refs.scroll.forceUpdate(pullFlag)
           }
@@ -117,6 +121,20 @@
           this.queryAll(true)
         }, 1000)
       },
+      onPullingUp() {
+        setTimeout(() => {
+          if (this._isDestroyed) {
+            return
+          }
+          if (Math.random() > 0.5) {
+            // 如果有新数据
+            this.$refs.scroll.forceUpdate()
+          } else {
+            // 如果没有新数据
+            this.$refs.scroll.forceUpdate()
+          }
+        }, 1500)
+      },
       queryStartEnd() {
         let start = this.startAddress
         let end = this.endAddress
@@ -136,7 +154,13 @@
         })
       },
       queryTypeList(type) {
-        queryPublishType(1)
+        if (event._constructed) {
+          return
+        }
+        queryPublishType(type).then((res) => {
+          this._normalizeResultList(res)
+        }).catch(() => {
+        })
       },
       _normalizePublishInfo(list) {
         let publiObj = []
@@ -144,6 +168,12 @@
           publiObj.push(createPublishInfo(item))
         })
         return publiObj
+      },
+      _normalizeResultList(res) {
+        let result = res.result
+        if (result) {
+          this.publishList = this._normalizePublishInfo(result)
+        }
       },
       ...mapMutations({
         setPublishInfo: 'SET_PUBLISINFO'
