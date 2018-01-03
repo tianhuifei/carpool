@@ -44,5 +44,5 @@ export function queryPublishType(publishType) {
     'condition.publishType': publishType
   }
   let url = publishType ? peopleUrl : carUrl
-  return jsonp(url, data, options)
+  return jsonp(ROOT_URL + url, data, options)
 }
