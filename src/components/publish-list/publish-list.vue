@@ -1,6 +1,6 @@
 <template>
   <div class="result-content">
-    <div class="result-item" v-for="(item,index) in list">
+    <div class="result-item" :class="{ 'become-due': item.becomeDue }" v-for="(item,index) in list">
       <div class="result-left" @click="selectPublish(item)">
         <div class="result-address">
           <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
@@ -9,7 +9,7 @@
         <div class="result-date">
           发车时间：
           <span class="start-time">
-            {{ item.publishTime }}
+            {{ item.startTime }}
           </span>
         </div>
         <div class="result-info">
@@ -59,6 +59,14 @@
   @import "../../assets/css/base-standard";
 
   .result-item {
+    &.become-due{
+      .people-for-car,.car-for-people{
+        background:$past-font-color;
+      }
+      .result-left .result-address p{
+        color:$past-font-color;
+      }
+    }
     background: $color-white;
     margin-bottom: 5px;
     @include justify-items;

@@ -51,13 +51,31 @@ export function queryPublishType(publishType) {
  * 上拉加载
  * @param publishType
  */
-export function pullUp(publishType, currentPage, startAdd, endAdd) {
-  let url = publishType ? peopleUrl : carUrl
-  if (publishType && publishType < 0) {
-    url = queryAll
-  } else {
-    url = startEndUrl
+export function pullUp(currentPage, publishType, startAdd, endAdd, apiType) {
+  let url = ''
+  // if (Number.isInteger(publishType)) {
+  //   url = publishType ? peopleUrl : carUrl
+  //   if (publishType < 0) {
+  //     url = queryAll
+  //   }
+  // }
+  // if (Object.prototype.toString.call(publishType) === '[object String]') {
+  //   endAdd = startAdd
+  //   startAdd = publishType
+  //   url = startEndUrl
+  // }
+  switch (apiType) {
+    case 'queryAll':
+      url = queryAll
+      break
+    case 'startEnd':
+      url = startEndUrl
+      break
+    case 'typeList':
+      url = publishType ? peopleUrl : carUrl
+      break
   }
+
   let data = Object.assign({}, commonParams, {
     'condition.currentPage': currentPage,
     'condition.publishType': publishType,

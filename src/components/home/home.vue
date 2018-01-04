@@ -58,8 +58,9 @@
         publishList: [],
         startAddress: '',
         endAddress: '',
-        publishType: -1,
+        publishType: 0,
         currentPageIndex: 0,
+        apiType: 'queryAll',
         swiper: [
           {
             url: 'javascript:void(0);',
@@ -104,6 +105,7 @@
     methods: {
       queryAll(pullFlag) {
         this.publishType = null
+        this.apiType = 'queryAll'
         this.currentPageIndex = 0
         getQueryALl().then((res) => {
           this._normalizeResultList(res)
@@ -123,7 +125,8 @@
         this.setPublishInfo(item)
       },
       onPullingDown() {
-        this.publishType = -1
+        this.publishType = null
+        this.apiType = 'queryAll'
         this.currentPageIndex = 0
         setTimeout(() => {
           this.queryAll(true)
@@ -132,15 +135,21 @@
       onPullingUp() {
         this.currentPageIndex += 5
         setTimeout(() => {
-          pullUp(this.publishType, this.currentPageIndex, this.startAddress, this.endAddres).then((res) => {
+          pullUp(this.currentPageIndex, this.publishType, this.startAddress, this.endAddres, this.apiType).then((res) => {
+            if (!res.result) {
+              this.$refs.scroll.forceUpdate()
+              return
+            }
             this._normalizeResultList(res, true)
+            this.$refs.scroll.forceUpdate(true)
           }).catch(() => {
             this.$refs.scroll.forceUpdate()
           })
         }, 1500)
       },
       queryStartEnd() {
-        this.publishType = -1
+        this.publishType = null
+        this.apiType = 'startEnd'
         this.currentPageIndex = 0
         let start = this.startAddress
         let end = this.endAddress
@@ -161,6 +170,7 @@
       },
       queryTypeList(type) {
         this.publishType = type
+        this.apiType = 'typeList'
         this.currentPageIndex = 0
         if (event._constructed) {
           return
@@ -182,7 +192,7 @@
         let result = res.result
         if (result) {
           if (type) {
-            this.publishList.concat(this._normalizePublishInfo(result))
+            this.publishList = this.publishList.concat(this._normalizePublishInfo(result))
           } else {
             this.publishList = this._normalizePublishInfo(result)
           }
