@@ -3,7 +3,8 @@
     <div class="result-item" :class="{ 'become-due': item.becomeDue }" v-for="(item,index) in list">
       <div class="result-left" @click="selectPublish(item)">
         <div class="result-address">
-          <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
+          <span
+            :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
           <p><span>{{ item.startAddress }}</span>-<span>{{ item.endAddres }}</span></p>
         </div>
         <div class="result-date">
@@ -31,21 +32,33 @@
         </div>
       </div>
     </div>
+    <divider v-show="dividerText">{{dividerText}}</divider>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   // import {mapMutations} from 'vuex'
+  import {Divider} from 'vux'
 
   export default {
+    components: {
+      Divider
+    },
     props: {
       list: {
         type: Array,
         default: null
       }
     },
+    watch: {
+      list() {
+        this.dividerText = this.list && this.list.length ? '' : '没有找到匹配的信息'
+      }
+    },
     data() {
-      return {}
+      return {
+        dividerText: ''
+      }
     },
     methods: {
       selectPublish(item) {
@@ -59,12 +72,12 @@
   @import "../../assets/css/base-standard";
 
   .result-item {
-    &.become-due{
-      .people-for-car,.car-for-people{
-        background:$past-font-color;
+    &.become-due {
+      .people-for-car, .car-for-people {
+        background: $past-font-color;
       }
-      .result-left .result-address p{
-        color:$past-font-color;
+      .result-left .result-address p {
+        color: $past-font-color;
       }
     }
     background: $color-white;
