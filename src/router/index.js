@@ -19,7 +19,7 @@ export default new Router({
       component: Detail
     },
     {
-      path: '/publish/:id',
+      path: '/publish/:id/:type',
       name: 'Publish',
       component: publishEdit
     }
