@@ -28,7 +28,7 @@
           <x-button class="people-to-car" @click.native="queryTypeList(1)" :mini="true" type="default">人找车</x-button>
         </div>
         <div>
-          <router-link to="/publish/publish">
+          <router-link to="/publish/-1/publish">
           <x-button class="publish-btn" :mini="true" type="default">发布</x-button></router-link>
         </div>
       </div>
