@@ -35,6 +35,7 @@
       <!--查找，发布-->
       <publish-list @selectPublish="select" :list="publishList"></publish-list>
     </scroll>
+    <router-view></router-view>
   </div>
 
 </template>
