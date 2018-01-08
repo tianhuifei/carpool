@@ -29,7 +29,8 @@
         </div>
         <div>
           <router-link to="/publish/-1/publish">
-          <x-button class="publish-btn" :mini="true" type="default">发布</x-button></router-link>
+            <x-button class="publish-btn" :mini="true" type="default">发布</x-button>
+          </router-link>
         </div>
       </div>
       <!--查找，发布-->
@@ -44,7 +45,7 @@
   import Scroll from 'base/scroll/scroll'
   import {XButton, Swiper} from 'vux'
   import PublishList from 'components/publish-list/publish-list'
-  import {getQueryALl, queryStartEnd, queryPublishType, pullUp} from '../../api/resultList'
+  import {getQueryALl, queryStartEndApi, queryPublishType, pullUp} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
 
@@ -111,9 +112,6 @@
         this.currentPageIndex = 0
         getQueryALl().then((res) => {
           this._normalizeResultList(res)
-          if (pullFlag) {
-            this.$refs.scroll.forceUpdate(pullFlag)
-          }
         }).catch(() => {
           if (pullFlag) {
             this.$refs.scroll.forceUpdate()
@@ -156,16 +154,23 @@
         let start = this.startAddress
         let end = this.endAddress
         if (!start) {
-          return
+          this.$vux.toast.show({
+            text: '请输入始发地',
+            type: 'text',
+            position: 'top'
+          })
+          return false
         }
         if (!end) {
+          this.$vux.toast.show({
+            text: '请输入目的地',
+            type: 'text',
+            position: 'top'
+          })
           return
         }
-        queryStartEnd(this.startAddress, this.endAddress).then((res) => {
-          let result = res.result
-          if (result) {
-            this.publishList = this._normalizePublishInfo(result)
-          }
+        queryStartEndApi(this.startAddress, this.endAddress).then((res) => {
+          this.publishList = this._normalizeResultList(res)
         }).catch(() => {
 
         })
@@ -198,6 +203,8 @@
           } else {
             this.publishList = this._normalizePublishInfo(result)
           }
+        } else {
+          this.publishList = []
         }
       },
       ...mapMutations({
