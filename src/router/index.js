@@ -11,17 +11,18 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
-    },
-    {
-      path: '/detail/:id',
-      name: 'Detail',
-      component: Detail
-    },
-    {
-      path: '/publish/:id/:type',
-      name: 'Publish',
-      component: publishEdit
+      component: Home,
+      children: [
+        {
+          path: '/detail/:id',
+          component: Detail
+        },
+        {
+          path: '/publish/:id/:type',
+          name: 'Publish',
+          component: publishEdit
+        }
+      ]
     }
   ]
 })
