@@ -71,7 +71,24 @@
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
 
+  $b-color : #efefef;
   .result-item {
+    position: relative;
+    &:before,&:after{
+      position: absolute;
+      left:0;
+      right:0;
+      height:1px;
+      transform: scaleY(.5);
+      background:$b-color;
+      content:''
+    }
+    &:before{
+      top:0;
+    }
+    &:after{
+      bottom:0;
+    }
     &.become-due {
       .people-for-car, .car-for-people {
         background: $past-font-color;
