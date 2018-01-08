@@ -22,7 +22,7 @@ export function getQueryALl() {
  * @param startAdd
  * @param endAdd
  */
-export function queryStartEnd(startAdd, endAdd) {
+export function queryStartEndApi(startAdd, endAdd) {
   const url = ROOT_URL + startEndUrl
   let data = {
     'condition.currentPage': 0,
