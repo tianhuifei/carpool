@@ -1,6 +1,7 @@
 <template>
   <transition name="page">
     <div class="page-style">
+      <x-header>详细信息</x-header>
       <div class="detail-main">
         <div class="list-box">
           <ul class="list-ul">
@@ -11,34 +12,19 @@
         </div>
       </div>
     </div>
-
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapMutations, mapGetters} from 'vuex'
-
+  import { XHeader } from 'vux'
   export default {
     name: 'detail',
-    components: {},
-    computed: {
-      xHeaderObj() {
-        return this.getXheader()
-      }
+    components: {
+      XHeader
     },
-    mounted() {
-      this.setXheader({
-        show: true
-      })
-    },
-    methods: {
-      ...mapMutations({
-        setXheader: 'SET_XHEADER'
-      }),
-      ...mapGetters({
-        getXheader: 'xHeader'
-      })
-    }
+    computed: {},
+    mounted() {},
+    methods: {}
   }
 </script>
 
