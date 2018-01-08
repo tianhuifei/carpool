@@ -1,29 +1,41 @@
-<template>
+ <template>
   <transition name="page">
     <div class="page-style">
       <x-header>详细信息</x-header>
       <div class="detail-main">
-        <div class="list-box">
-          <ul class="list-ul">
-            <li class="list-li">1</li>
-            <li class="list-li">2</li>
-            <li class="list-li">3</li>
-          </ul>
-        </div>
+
+        <group label-width="5em" label-margin-right="2em" label-align="right">
+          <cell title="拼车类型：">
+            <div class=""><span class="people-for-car">人找车</span></div>
+          </cell>
+          <cell title="出发地：">北京</cell>
+          <cell title="目的地：">邯郸</cell>
+          <cell title="出发时间：">12月31日（周日） 12:00</cell>
+          <cell title="发布人：">飞哥</cell>
+          <cell title="手机号：">15652286604</cell>
+          <cell title="车牌号："></cell>
+          <cell title="人数/空位："></cell>
+          <cell title="发布时间：">12月20日发布</cell>
+        </group>
+
       </div>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
-  import { XHeader } from 'vux'
+  import {XHeader, Group, Cell} from 'vux'
+
   export default {
     name: 'detail',
     components: {
-      XHeader
+      XHeader,
+      Group,
+      Cell
     },
     computed: {},
-    mounted() {},
+    mounted() {
+    },
     methods: {}
   }
 </script>
@@ -31,53 +43,7 @@
 <style scoped lang="scss">
   @import '../../assets/css/base-standard';
 
-  $list-border-color: #c8c7cc;
-  .list-box {
-    position: relative;
-    width: 100%;
-    background: $color-white;
-    margin: 10px 0;
-    .list-ul {
-      position: relative;
-      &::before {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: -1px;
-        height: 1px;
-        background: $list-border-color;
-        transform: scaleY(.5);
-        content: ''
-      }
-      &::after {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 1px;
-        background: $list-border-color;
-        transform: scaleY(.5);
-        content: ''
-      }
-      .list-li {
-        display: flex;
-        padding: 15px 20px;
-        position: relative;
-        overflow: hidden;
-        font-size: 14px;
-        &::after {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          left: 15px;
-          height: 1px;
-          content: '';
-          transform: scaleY(.5);
-          background-color: $list-border-color;
-        }
-      }
-    }
-  }
+
 
 
 </style>
