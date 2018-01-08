@@ -116,6 +116,7 @@
           if (pullFlag) {
             this.$refs.scroll.forceUpdate()
           }
+          this._errorCommon()
         })
       },
       select(item) {
@@ -144,6 +145,7 @@
             this.$refs.scroll.forceUpdate(true)
           }).catch(() => {
             this.$refs.scroll.forceUpdate()
+            this._errorCommon()
           })
         }, 1500)
       },
@@ -170,9 +172,9 @@
           return
         }
         queryStartEndApi(this.startAddress, this.endAddress).then((res) => {
-          this.publishList = this._normalizeResultList(res)
+          this._normalizeResultList(res)
         }).catch(() => {
-
+          this._errorCommon()
         })
       },
       queryTypeList(type) {
@@ -186,6 +188,7 @@
         queryPublishType(type).then((res) => {
           this._normalizeResultList(res)
         }).catch(() => {
+          this._errorCommon()
         })
       },
       _normalizePublishInfo(list) {
@@ -206,6 +209,14 @@
         } else {
           this.publishList = []
         }
+      },
+      _errorCommon() {
+        this.publishList = []
+        this.$vux.toast({
+          text: '请求发生异常',
+          type: 'warn',
+          position: 'middle'
+        })
       },
       ...mapMutations({
         setPublishInfo: 'SET_PUBLISINFO'
