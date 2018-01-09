@@ -1,2 +1,2 @@
-export const publishInfo = state => state.publishInfo
+export const getPublishInfo = state => state.publishInfo
 export const xHeader = state => state.xHeader

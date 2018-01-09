@@ -37,6 +37,7 @@
       <publish-list @selectPublish="select" :list="publishList"></publish-list>
     </scroll>
     <router-view></router-view>
+    <tab-bar></tab-bar>
   </div>
 
 </template>
@@ -48,13 +49,15 @@
   import {getQueryALl, queryStartEndApi, queryPublishType, pullUp} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
+  import TabBar from 'components/tab-bar/tab-bar'
 
   export default {
     components: {
       Scroll,
       XButton,
       PublishList,
-      Swiper
+      Swiper,
+      TabBar
     },
     data() {
       return {

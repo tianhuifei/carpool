@@ -13,6 +13,7 @@ body {
 }
 // page页样式
 .page-style{
+  box-sizing: content-box;
   position: fixed;
   top:0;
   bottom:0;
@@ -70,6 +71,9 @@ body {
   font-size: 12px !important;
 }
 
+.textarea textarea{
+  background-color:$color-white;
+}
 
 
 
