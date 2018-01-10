@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view></router-view>
+        <router-view></router-view>
     </keep-alive>
+    <tab-bar></tab-bar>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Home from 'components/home/home'
+  import TabBar from 'components/tab-bar/tab-bar'
 
   export default {
     components: {
-      Home
+      Home,
+      TabBar
     }
   }
 </script>
