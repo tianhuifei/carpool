@@ -230,8 +230,7 @@
   .home-main {
     position: fixed;
     top: 0;
-    bottom: 0;
-    padding-bottom: $tab-bar-height;
+    bottom: $tab-bar-height;
     width: 100%;
     .home-main-content {
       height: 100%;
