@@ -1,7 +1,7 @@
 <template>
   <transition name="page" mode="out-in">
     <div class="page-style">
-      <x-header>详细信息</x-header>
+      <x-header :left-options="{backText: ''}">详细信息</x-header>
       <div class="detail-main">
         <scroll>
           <div class="content-body">
