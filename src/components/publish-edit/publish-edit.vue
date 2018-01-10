@@ -8,8 +8,8 @@
             <group>
               <popup-picker :title="publishObj.publishTitle" :data="typeList" v-model="publishObj.publishValue"
                             @on-change="setPublishType"></popup-picker>
-              <x-input required="true" title="出发地：" placeholder="请输入出发地"></x-input>
-              <x-input required="true" title="目的地：" placeholder="请输入目的地"></x-input>
+              <x-input :required="true" title="出发地：" placeholder="请输入出发地"></x-input>
+              <x-input :required="true" title="目的地：" placeholder="请输入目的地"></x-input>
             </group>
           </div>
 
