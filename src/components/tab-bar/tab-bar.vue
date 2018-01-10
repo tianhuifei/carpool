@@ -41,6 +41,7 @@
     height:50px;
     background-color:$tab-bar-bg-color;
     position:fixed;
+    z-index:$z-index-10;
     bottom:0;
     width:100%;
     display: flex;
