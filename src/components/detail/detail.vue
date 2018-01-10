@@ -1,5 +1,5 @@
 <template>
-  <transition name="page">
+  <transition name="page" mode="out-in">
     <div class="page-style">
       <x-header>详细信息</x-header>
       <div class="detail-main">
