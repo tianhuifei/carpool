@@ -5,7 +5,7 @@
       <div class="detail-main">
         <scroll>
           <div class="content-body">
-            <group label-width="5.5em" label-margin-right="2em" label-align="right" v-if="publishInfo">
+            <group label-width="5.5em" label-margin-right="1em" label-align="right"  v-if="publishInfo">
               <cell title="拼车类型：">
                 <div class=""><span :class="publishInfo.publishType ? 'people-for-car' : 'car-for-people'">{{ publishInfo.publishType ? "人找车" : "车找人" }}</span>
                 </div>
