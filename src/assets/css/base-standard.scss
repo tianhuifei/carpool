@@ -31,6 +31,8 @@ $color-white: #FFF;
 //tab-bar-height
 $tab-bar-height: 52px;
 
+//liability
+$liability-color:#576b95;
 //省略号
 @mixin text-overflow($row: 1){
   line-clamp: $row;
