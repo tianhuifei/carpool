@@ -34,18 +34,22 @@
               </cell>
             </group>
             <div class="liability-box">
-              <check-icon :value.sync="publishObj.liability">阅读并同意 <a href="javascript:void(0)">《免责声明》</a></check-icon>
+              <check-icon :value="publishObj.submitBtn">阅读并同意</check-icon>
+              <a @click="showDisclaimer" href="javascript:void(0)">《免责声明》</a>
+            </div>
+            <div class="" style="padding:5px 10px;padding-bottom:15px;">
+              <x-button :disabled="!publishObj.submitBtn" type="primary">立即发布</x-button>
             </div>
           </div>
         </scroll>
       </div>
-      <disclaimer :is-show.sync="publishObj.liability"></disclaimer>
+      <disclaimer :is-show.sync="publishObj.disclaimer"></disclaimer>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
-  import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon} from 'vux'
+  import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon, XButton} from 'vux'
   import Scroll from 'base/scroll/scroll'
   import {presentTime} from '../../api/publish-edit'
   import disclaimer from 'components/disclaimer/disclaimer'
@@ -56,6 +60,8 @@
       return {
         showHideOnBlur: true,
         publishObj: {
+          submitBtn: false,
+          disclaimer: false,
           publishTitle: '拼车类型：',
           publishValue: [],
           setDateTitle: '出发时间:',
@@ -95,7 +101,8 @@
       Datetime,
       XTextarea,
       CheckIcon,
-      disclaimer
+      disclaimer,
+      XButton
     },
 
     mounted() {
@@ -103,6 +110,9 @@
       this._getDate()
     },
     methods: {
+      showDisclaimer() {
+        this.publishObj.disclaimer = true
+      },
       setPublishType(val) {
         this.carpoolInfo.publishType = val === '人找车' ? 1 : 0
       },
@@ -132,13 +142,18 @@
 
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
-  .content-body{
+
+  .content-body {
     overflow: hidden;
   }
-  .liability-box{
-    padding:10px 15px;
-    a{
-      color:$liability-color;
+
+  .liability-box {
+    padding: 10px 15px;
+    a {
+      display: inline-block;
+      color: $liability-color;
+      line-height: 23px;
+      vertical-align: middle;
     }
   }
 </style>
