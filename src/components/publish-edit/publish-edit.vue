@@ -30,7 +30,7 @@
             <group title="备注">
               <cell class="textarea">
                 <x-textarea placeholder="如以上信息不完整，那你可以在此处填写完整的哦 " :max="200"
-                            v-model="publishObj.publishTitle"></x-textarea>
+                            v-model="carpoolInfo.remarks"></x-textarea>
               </cell>
             </group>
             <div class="liability-box">
@@ -39,22 +39,16 @@
           </div>
         </scroll>
       </div>
-      <x-dialog v-model="publishObj.liability" class="dialog-demo" hide-on-blur>
-        <div class="img-box">
-          <img src="https://static.vux.li/demos/v2/static/img/01.06186f7.jpg" style="max-width:100%">
-        </div>
-        <div @click="publishObj.liability=false">
-          <span class="vux-close"></span>
-        </div>
-      </x-dialog>
+      <disclaimer :is-show.sync="publishObj.liability"></disclaimer>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
-  import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon, XDialog} from 'vux'
+  import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon} from 'vux'
   import Scroll from 'base/scroll/scroll'
   import {presentTime} from '../../api/publish-edit'
+  import disclaimer from 'components/disclaimer/disclaimer'
 
   export default {
     name: 'publish-edit',
@@ -101,7 +95,7 @@
       Datetime,
       XTextarea,
       CheckIcon,
-      XDialog
+      disclaimer
     },
 
     mounted() {
@@ -145,25 +139,6 @@
     padding:10px 15px;
     a{
       color:$liability-color;
-    }
-  }
-
-  .dialog-demo {
-    .weui-dialog{
-      border-radius: 8px;
-      padding-bottom: 8px;
-    }
-    .dialog-title {
-      line-height: 30px;
-      color: #666;
-    }
-    .img-box {
-      height: 350px;
-      overflow: hidden;
-    }
-    .vux-close {
-      margin-top: 8px;
-      margin-bottom: 8px;
     }
   }
 </style>
