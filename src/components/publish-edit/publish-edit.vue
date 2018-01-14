@@ -19,22 +19,22 @@
                         confirm-text="完成" cancel-text="取消" value-text-align="left"></datetime>
             </group>
             <group gutter="10px" label-width="5.5em" label-margin-right="2em" label-align="justify">
-              <x-input is-type="china-name" :required="true" title="联系人：" placeholder="请输入联系人"
+              <x-input is-type="china-name" type="text" :required="true" title="联系人：" placeholder="请输入联系人"
                        v-model="carpoolInfo.contacts"></x-input>
               <x-input mask="999 9999 9999" type="tel" is-type="china-mobile" :required="true" title="手机号："
                        v-model="carpoolInfo.contactsPhone"
                        placeholder="请输入手机号"></x-input>
-              <x-input title='人数/空位：' :required="true" v-model="carpoolInfo.vacancy" :max="2"
+              <x-input v-if="!carpoolInfo.publishType" title='车牌号：' v-model="carpoolInfo.carNumber" type="text"
+                       placeholder="请输入车牌号"></x-input>
+              <x-input title='人数/空位：' type="number" :required="true" v-model="carpoolInfo.vacancy" :max="2"
                        placeholder="人数/空位"></x-input>
             </group>
             <group title="备注">
-              <cell class="textarea">
-                <x-textarea placeholder="如以上信息不完整，那你可以在此处填写完整的哦 " :max="200"
-                            v-model="carpoolInfo.remarks"></x-textarea>
-              </cell>
+              <x-textarea placeholder="如以上信息不完整，那你可以在此处填写完整的哦 " :max="200"
+                          v-model="carpoolInfo.remarks"></x-textarea>
             </group>
             <div class="liability-box">
-              <check-icon :value="publishObj.submitBtn">阅读并同意</check-icon>
+              <check-icon :value.sync="publishObj.submitBtn">阅读并同意</check-icon>
               <a @click="showDisclaimer" href="javascript:void(0)">《免责声明》</a>
             </div>
             <div class="" style="padding:5px 10px;padding-bottom:15px;">
@@ -104,7 +104,7 @@
       disclaimer,
       XButton
     },
-
+    computed: {},
     mounted() {
       this._initPublish()
       this._getDate()
@@ -114,7 +114,7 @@
         this.publishObj.disclaimer = true
       },
       setPublishType(val) {
-        this.carpoolInfo.publishType = val === '人找车' ? 1 : 0
+        this.carpoolInfo.publishType = val[0] === '人找车' ? 1 : 0
       },
       setDateTime(val) {
         if (!val) {
