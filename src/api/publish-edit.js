@@ -10,6 +10,10 @@ export function presentTime() {
   return jsonp(ROOT_URL + url, null, options)
 }
 
+/**
+ * 添加 发布信息
+ * @param carpoolInfo
+ */
 export function addPublish(carpoolInfo) {
   let url = '/publish/publish/add_publish'
   const data = {
