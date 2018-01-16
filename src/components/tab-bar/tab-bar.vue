@@ -26,7 +26,7 @@
           {
             className: 'car-wode4',
             name: '我的',
-            to: '/foo'
+            to: '/personal'
           }
         ]
       }
