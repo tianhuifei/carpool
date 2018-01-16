@@ -4,6 +4,7 @@ import Home from 'components/home/home'
 import Detail from 'components/detail/detail'
 import PublishEdit from 'components/publish-edit/publish-edit'
 import PersonalCenter from 'components/personal-center/personal-center'
+import MyPublish from 'components/my-publish/my-publish'
 
 Vue.use(Router)
 
@@ -17,7 +18,13 @@ export default new Router({
     {
       path: '/personal',
       name: 'personal',
-      component: PersonalCenter
+      component: PersonalCenter,
+      children: [
+        {
+          path: ':id',
+          component: MyPublish
+        }
+      ]
     },
     {
       path: '/detail/:id',
