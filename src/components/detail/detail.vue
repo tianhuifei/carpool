@@ -101,4 +101,7 @@
     left: 0;
     right: 0;
   }
+  .weui-cell{
+    font-size:16px;
+  }
 </style>
