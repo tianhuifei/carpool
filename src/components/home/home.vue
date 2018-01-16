@@ -227,17 +227,6 @@
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
 
-  .home-main {
-    position: fixed;
-    top: 0;
-    bottom: $tab-bar-height;
-    width: 100%;
-    .home-main-content {
-      height: 100%;
-      overflow: hidden;
-    }
-  }
-
   .main-search-box {
     margin-bottom: 5px;
     width: 100%;
