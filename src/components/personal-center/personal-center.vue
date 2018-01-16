@@ -1,8 +1,11 @@
 <template>
   <div class="body-main">
     <div class="my-header">
-      <p class="center">
+      <p class="center" v-if="user">
         <img :src="url" alt="">
+      </p>
+      <p class="center">
+        <x-button type="primary" mini="true">登录</x-button>
       </p>
     </div>
     <group gutter="5px">
@@ -15,20 +18,37 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {Group, Cell} from 'vux'
+  import {Group, Cell, XButton} from 'vux'
 
   export default {
     name: 'personal-center',
     data() {
       return {
-        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg'
+        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
+        user: null
       }
     },
     activated() {
+      setTimeout(() => {
+        this._getUser()
+      }, 20)
+    },
+    methods: {
+      _getUser() {
+        this.user = JSON.parse(localStorage.getItem('user'))
+        // if (!this.user) {
+        //   this.$vux.toast.show({
+        //     type: 'text',
+        //     text: '请登录',
+        //     position: 'middle'
+        //   })
+        // }
+      }
     },
     components: {
       Group,
-      Cell
+      Cell,
+      XButton
     }
   }
 </script>
