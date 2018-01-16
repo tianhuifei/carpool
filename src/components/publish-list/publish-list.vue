@@ -18,7 +18,7 @@
             {{ item.vacancy }}空位
           </div>
           <div class="show-see">
-            {{ item.seeNum }} <span class=" carpoll car-see"></span>
+            <countup :duration=1 :start-val=0 :end-val="item.seeNum"></countup> <span class=" carpoll car-see"></span>
           </div>
         </div>
       </div>
@@ -38,11 +38,12 @@
 
 <script type="text/ecmascript-6">
   // import {mapMutations} from 'vuex'
-  import {Divider} from 'vux'
+  import {Divider, Countup} from 'vux'
 
   export default {
     components: {
-      Divider
+      Divider,
+      Countup
     },
     props: {
       list: {
@@ -71,23 +72,23 @@
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
 
-  $b-color : #efefef;
+  $b-color: #efefef;
   .result-item {
     position: relative;
-    &:before,&:after{
+    &:before, &:after {
       position: absolute;
-      left:0;
-      right:0;
-      height:1px;
+      left: 0;
+      right: 0;
+      height: 1px;
       transform: scaleY(.5);
-      background:$b-color;
-      content:''
+      background: $b-color;
+      content: ''
     }
-    &:before{
-      top:0;
+    &:before {
+      top: 0;
     }
-    &:after{
-      bottom:0;
+    &:after {
+      bottom: 0;
     }
     &.become-due {
       .people-for-car, .car-for-people {
@@ -163,7 +164,7 @@
           text-align: right;
           padding-right: 20px;
           position: relative;
-          span {
+          span.car-see {
             position: absolute;
             right: 0;
             top: 1px;
