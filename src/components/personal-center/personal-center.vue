@@ -5,7 +5,7 @@
         <img :src="url" alt="">
       </p>
       <p class="center">
-        <x-button type="primary" mini="true">登录</x-button>
+        <x-button type="primary" :mini="true">登录</x-button>
       </p>
     </div>
     <group gutter="5px">
