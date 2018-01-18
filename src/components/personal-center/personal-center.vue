@@ -5,7 +5,7 @@
         <img :src="url" alt="">
       </p>
       <p class="center">
-        <x-button type="primary" :mini="true">登录</x-button>
+        <x-button @click.native="onSubmitBtn" type="primary" :mini="true">登录</x-button>
       </p>
     </div>
     <group gutter="5px">
@@ -14,18 +14,23 @@
       <cell title="关于" is-link><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
     </group>
     <router-view></router-view>
+    <x-dialog :show.sync="loginDialog" hide-on-blur>
+      <login></login>
+    </x-dialog>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {Group, Cell, XButton} from 'vux'
+  import {Group, Cell, XButton, XDialog} from 'vux'
   import {mapMutations, mapGetters} from 'vuex'
+  import Login from 'components/login/login'
 
   export default {
     name: 'personal-center',
     data() {
       return {
-        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg'
+        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
+        loginDialog: false
       }
     },
     activated() {
@@ -39,6 +44,9 @@
       ])
     },
     methods: {
+      onSubmitBtn() {
+        this.loginDialog = true
+      },
       _getUser() {
         this.setUser(JSON.parse(localStorage.getItem('user')))
       },
@@ -49,7 +57,9 @@
     components: {
       Group,
       Cell,
-      XButton
+      XButton,
+      Login,
+      XDialog
     }
   }
 </script>
