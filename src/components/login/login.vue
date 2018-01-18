@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <div class="input-box" ref="inputBox">
-      <div class="input-placeholder">
-        <span>请输入用户名</span>
+      <div class="input-title">
+        请输入用户名
       </div>
-      <input type="text" @blur="inputBlur" @focus="inputFocus">
+      <input type="text" @blur="inputBlur" @focus="inputFocus" v-model="currentValue">
       <span class="input-border-bottom"></span>
       <span class="input-border-bottom-focus"></span>
     </div>
@@ -16,6 +16,11 @@
 
   export default {
     name: 'login',
+    data() {
+      return {
+        currentValue: ''
+      }
+    },
     activated() {
     },
     methods: {
@@ -24,6 +29,15 @@
       },
       inputBlur() {
         removeClass(this.$refs.inputBox, 'focus')
+      }
+    },
+    watch: {
+      currentValue(val) {
+        if (val) {
+          addClass(this.$refs.inputBox, 'has-label')
+        } else {
+          removeClass(this.$refs.inputBox, 'has-label')
+        }
       }
     }
   }
@@ -48,6 +62,7 @@
   .input-box {
     padding: 28px 10px 12px 10px;
     position: relative;
+    text-align: left;
     input {
       appearance: none;
       outline: none;
@@ -71,7 +86,7 @@
       right: 0;
     }
     .input-border-bottom-focus {
-      margin-top:-1px;
+      margin-top: -1px;
       height: 2px;
       border: none;
       background-color: $app-color;
@@ -81,22 +96,30 @@
       transform: scaleX(0);
       transition: transform .45s ease;
     }
-    .input-placeholder{
-      display:inline-block;
-      position:absolute;
-      top:38px;
-      left:10px;
-      font-size:12px;
-      color:$basic-font-color;
-      transform: translate3d(0,0,0);
-      transition: transform .45s ease;
+    .input-title {
+      display: inline-block;
+      font-size: 14px;
+      color: $basic-font-color;
+      transition: all .45s ease;
+      cursor: text;
+      transform-origin: left top;
+      user-select: none;
+      pointer-events: none;
+      transform: translate3d(0, 23px, 0) scale(1);
     }
     &.focus {
       .input-border-bottom-focus {
         transform: scaleX(1);
       }
-      .input-placeholder{
-        transform: translate3d(0,-10px,0);
+      .input-title {
+        transform: translateZ(0) scale(.75);
+        color: $app-color !important;
+      }
+    }
+    &.has-label {
+      .input-title {
+        transform: translateZ(0) scale(.75);
+        color: $basic-font-color;
       }
     }
   }
