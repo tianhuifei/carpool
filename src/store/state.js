@@ -1,5 +1,6 @@
 const state = {
   publishInfo: {},
+  user: null,
   xHeader: {
     'left-options': {
       showBack: true,

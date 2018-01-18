@@ -6,6 +6,9 @@ const mutations = {
   },
   [types.SET_XHEADER](state, obj) {
     state.xHeader = Object.assign({}, state.xHeader, obj)
+  },
+  [types.SET_USER](state, user) {
+    state.user = user
   }
 }
 
