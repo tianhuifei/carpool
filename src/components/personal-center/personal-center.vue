@@ -19,13 +19,13 @@
 
 <script type="text/ecmascript-6">
   import {Group, Cell, XButton} from 'vux'
+  import {mapMutations, mapGetters} from 'vuex'
 
   export default {
     name: 'personal-center',
     data() {
       return {
-        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
-        user: null
+        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg'
       }
     },
     activated() {
@@ -33,17 +33,18 @@
         this._getUser()
       }, 20)
     },
+    computed: {
+      ...mapGetters([
+        'user'
+      ])
+    },
     methods: {
       _getUser() {
-        this.user = JSON.parse(localStorage.getItem('user'))
-        // if (!this.user) {
-        //   this.$vux.toast.show({
-        //     type: 'text',
-        //     text: '请登录',
-        //     position: 'middle'
-        //   })
-        // }
-      }
+        this.setUser(JSON.parse(localStorage.getItem('user')))
+      },
+      ...mapMutations({
+        setUser: 'SET_USER'
+      })
     },
     components: {
       Group,
