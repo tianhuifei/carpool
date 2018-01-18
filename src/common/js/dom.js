@@ -17,7 +17,7 @@ export function removeClass(el, className) {
     return
   }
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
-  el.className = el.className.replace(reg, ' ')
+  el.className = el.className.replace(reg, '')
 }
 
 export function getData(el, name, val) {
