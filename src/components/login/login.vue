@@ -1,7 +1,10 @@
 <template>
   <div class="login">
-    <t-input type="text" title="请输入用户名" v-model="inputValue"></t-input>
-    <t-input type="password" title="请输入密码" v-model="inputValue"></t-input>
+    <div class="logo-img">
+      <img src="/static/images/logo.png" alt="">
+    </div>
+    <t-input type="text" title="请输入用户名" v-model="userName"></t-input>
+    <t-input type="password" title="请输入密码" v-model="passWord"></t-input>
   </div>
 </template>
 
@@ -12,7 +15,8 @@
     name: 'login',
     data() {
       return {
-        inputValue: '一二三四五'
+        userName: '',
+        passWord: ''
       }
     },
     components: {
@@ -40,6 +44,17 @@
     height: 300px;
   }
 
+  .logo-img{
+    margin-top:10%;
+    width:100px;
+    height:100px;
+    text-align: center;
+    margin: 0 auto;
+    img{
+      width:100%;
+      height:100%;
+    }
+  }
   /******/
 
 </style>
