@@ -18,7 +18,6 @@ export function removeClass(el, className) {
   }
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
   el.className = el.className.replace(reg, ' ')
-  console.log(el.className)
   el.className = el.className.replace(/\s+/g, ' ')
 }
 
