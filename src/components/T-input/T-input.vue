@@ -68,7 +68,7 @@
   @import '../../assets/css/base-standard';
 
   .input-box {
-    padding: 28px 10px 12px 10px;
+    padding: 0 10px 10px 10px;
     position: relative;
     text-align: left;
     input {
