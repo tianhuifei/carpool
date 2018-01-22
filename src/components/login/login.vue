@@ -5,11 +5,16 @@
     </div>
     <t-input type="text" title="请输入用户名" v-model="userName"></t-input>
     <t-input type="password" title="请输入密码" v-model="passWord"></t-input>
+    <div class="btn-box">
+      <x-button type="primary" :plain="true" :mini="true">登录</x-button>
+    </div>
+
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import TInput from 'components/T-input/T-input'
+  import {XButton} from 'vux'
 
   export default {
     name: 'login',
@@ -20,7 +25,8 @@
       }
     },
     components: {
-      TInput
+      TInput,
+      XButton
     },
     watch: {
       inputValue(val) {
@@ -54,6 +60,9 @@
       width:100%;
       height:100%;
     }
+  }
+  .btn-box{
+    margin-top:18px;
   }
   /******/
 
