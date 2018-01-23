@@ -14,7 +14,7 @@
       <cell title="关于" is-link><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
     </group>
     <router-view></router-view>
-    <x-dialog :show.sync="loginDialog" hide-on-blur>
+    <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
       <login></login>
     </x-dialog>
   </div>
