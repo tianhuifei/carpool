@@ -17,14 +17,22 @@
       <div class="register" @click="onLoginOrReg">
         <a href="javascript:void(0);">登录</a>
       </div>
-      这是反而
+      <div class="reg-main">
+        <h1>注册</h1>
+        <t-input type="text" title="用户名"></t-input>
+        <t-input type="password" title="密码"></t-input>
+        <t-input type="password" title="再次输入密码"></t-input>
+        <div class="reg-btn">
+          <x-button type="primary" :plain="true" :mini="true">注册</x-button>
+        </div>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import TInput from 'components/T-input/T-input'
+  import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
 
   export default {
@@ -43,7 +51,6 @@
     methods: {
       onLoginOrReg() {
         this.register = !this.register
-        console.log(this.register)
       }
     },
     watch: {
@@ -81,6 +88,9 @@
     top: 10px;
     color: $basic-font-color;
     z-index: 10;
+    a{
+      font-size:12px;
+    }
   }
 
   .side {
@@ -89,7 +99,7 @@
     bottom: 0;
     right: 0;
     top: 0;
-    transition: all .8s ease;
+    transition: all .5s ease;
     backface-visibility: hidden;
     background-color: $color-white;
   }
@@ -128,6 +138,18 @@
 
   .btn-box {
     margin-top: 18px;
+  }
+
+  .reg-main{
+    margin-top:10px;
+    h1{
+      font-size:18px;
+      font-weight: bolder;
+      color:$app-color;
+    }
+    .reg-btn{
+      padding-top:20px;
+    }
   }
   /******/
 
