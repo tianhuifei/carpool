@@ -92,11 +92,10 @@ body {
     overflow: hidden;
   }
 }
-// 登录dialog无背景
+ // 登录dialog无背景
 .login-box {
   .weui-dialog {
+    overflow:visible !important;
     background-color: transparent !important;
   }
 }
-
-
