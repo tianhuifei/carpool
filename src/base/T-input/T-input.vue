@@ -1,11 +1,12 @@
 <template>
-  <div class="input-box" ref="inputBox">
+  <div class="input-box" :class="{error: !error.value }" ref="inputBox">
     <div v-if="title" class="input-title">
       {{title}}
     </div>
     <input ref="input" :type="type" @blur="inputBlur" @focus="inputFocus" v-model="currentValue">
     <span class="input-border-bottom"></span>
     <span class="input-border-bottom-focus"></span>
+    <p class="error-info"><span  v-if="!error.value">{{error.msg}}</span></p>
   </div>
 </template>
 
@@ -27,7 +28,11 @@
     },
     data() {
       return {
-        currentValue: ''
+        currentValue: '',
+        error: {
+          msg: '',
+          value: true
+        }
       }
     },
     created() {
@@ -68,7 +73,7 @@
   @import '../../assets/css/base-standard';
 
   .input-box {
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 5px 10px;
     position: relative;
     text-align: left;
     input {
@@ -92,6 +97,7 @@
       position: absolute;
       left: 0;
       right: 0;
+
     }
     .input-border-bottom-focus {
       margin-top: -1px;
@@ -103,6 +109,7 @@
       right: 0;
       transform: scaleX(0);
       transition: transform .45s ease;
+
     }
     .input-title {
       display: inline-block;
@@ -128,6 +135,23 @@
       .input-title {
         transform: translateZ(0) scale(.75);
         color: $basic-font-color;
+      }
+    }
+    .error-info {
+      height:12px;
+      font-size: 12px;
+      padding-top: 5px;
+      color: $color-error !important;
+    }
+    &.focus.error {
+      .input-border-bottom-focus{
+        background-color:$color-error !important;
+      }
+      .input-border-bottom{
+        background-color:$color-error !important;
+      }
+      .input-title{
+        color:$color-error !important;
       }
     }
   }
