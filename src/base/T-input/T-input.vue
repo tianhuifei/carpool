@@ -1,12 +1,14 @@
 <template>
-  <div class="input-box" :class="{error: !error.value }" ref="inputBox">
-    <div v-if="title" class="input-title">
-      {{title}}
+  <div class="input-box" ref="inputBox">
+    <div :class="{'error': !error.value }">
+      <div v-if="title" class="input-title">
+        {{title}}
+      </div>
+      <input ref="input" :type="type" @blur="inputBlur" @focus="inputFocus" v-model="currentValue">
+      <span class="input-border-bottom"></span>
+      <span class="input-border-bottom-focus"></span>
+      <p class="error-info"><span v-if="!error.value">{{error.msg}}</span></p>
     </div>
-    <input ref="input" :type="type" @blur="inputBlur" @focus="inputFocus" v-model="currentValue">
-    <span class="input-border-bottom"></span>
-    <span class="input-border-bottom-focus"></span>
-    <p class="error-info"><span  v-if="!error.value">{{error.msg}}</span></p>
   </div>
 </template>
 
@@ -24,15 +26,20 @@
       title: {
         type: String,
         default: null
+      },
+      error: {
+        type: Object,
+        default: () => {
+          return {
+            msg: '',
+            value: true
+          }
+        }
       }
     },
     data() {
       return {
-        currentValue: '',
-        error: {
-          msg: '',
-          value: true
-        }
+        currentValue: ''
       }
     },
     created() {
@@ -61,6 +68,12 @@
           removeClass(this.$refs.inputBox, 'has-label')
         }
         this.$emit('input', val)
+        if (!val) {
+          this.$emit('update:error', {
+            msg: '',
+            value: true
+          })
+        }
       },
       value(val) {
         this.currentValue = val
@@ -138,21 +151,24 @@
       }
     }
     .error-info {
-      height:12px;
+      height: 12px;
       font-size: 12px;
       padding-top: 5px;
       color: $color-error !important;
     }
-    &.focus.error {
-      .input-border-bottom-focus{
-        background-color:$color-error !important;
-      }
-      .input-border-bottom{
-        background-color:$color-error !important;
-      }
-      .input-title{
-        color:$color-error !important;
+    &.focus {
+      .error {
+        .input-border-bottom-focus {
+          background-color: $color-error !important;
+        }
+        .input-border-bottom {
+          background-color: $color-error !important;
+        }
+        .input-title {
+          color: $color-error !important;
+        }
       }
     }
+
   }
 </style>
