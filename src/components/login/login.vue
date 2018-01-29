@@ -19,11 +19,11 @@
       </div>
       <div class="reg-main">
         <h1>注册</h1>
-        <t-input type="text" title="用户名"></t-input>
-        <t-input type="password" title="密码"></t-input>
-        <t-input type="password" title="再次输入密码"></t-input>
+        <t-input type="text" v-model="regUserName" :error.sync="regUserNameError" title="用户名"></t-input>
+        <t-input type="password" v-model="regPassWord" :error.sync="regPassWordError" title="密码"></t-input>
+        <t-input type="password" :error.sync="againPassWordError" v-model="againPassWord" title="再次输入密码"></t-input>
         <div class="reg-btn">
-          <x-button type="primary" :plain="true" :mini="true">注册</x-button>
+          <x-button type="primary" @click.native="onRegister" :plain="true" :mini="true">注册</x-button>
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 <script type="text/ecmascript-6">
   import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
+  import {register} from '../../api/login/login'
 
   export default {
     name: 'login',
@@ -41,6 +42,21 @@
       return {
         userName: '',
         passWord: '',
+        againPassWord: '',
+        againPassWordError: {
+          msg: '',
+          value: true
+        },
+        regUserName: '',
+        regPassWord: '',
+        regUserNameError: {
+          msg: '',
+          value: true
+        },
+        regPassWordError: {
+          msg: '',
+          value: true
+        },
         register: false
       }
     },
@@ -51,10 +67,55 @@
     methods: {
       onLoginOrReg() {
         this.register = !this.register
+      },
+      onRegister() {
+        if (!this.regUserName) {
+          this.regUserNameError = {
+            msg: '请填写用户名',
+            value: false
+          }
+          return false
+        }
+        if (this.regUserName.length >= 20) {
+          this.regUserNameError = {
+            msg: '用户名长度应小于20',
+            value: false
+          }
+          return false
+        }
+        if (!this.regPassWord) {
+          this.regPassWordError = {
+            msg: '请输入密码',
+            value: false
+          }
+          return false
+        }
+        if (this.regPassWord !== this.againPassWord) {
+          return false
+        }
+        register(this.regUserName, this.againPassWord).then(() => {
+        }).catch(() => {
+        })
       }
     },
     watch: {
       inputValue(val) {
+      },
+      againPassWord(val) {
+        if (this.regPassWord === val) {
+          this.againPassWordError.value = true
+        } else {
+          this.againPassWordError.value = false
+          this.againPassWordError.msg = '密码不一致'
+        }
+      },
+      regUserName(val) {
+        if (val && val.length <= 20) {
+          this.regUserNameError = {
+            msg: '',
+            value: true
+          }
+        }
       }
     }
   }
@@ -82,14 +143,14 @@
   }
 
   .register {
-    padding:5px;
+    padding: 5px;
     position: absolute;
     right: 10px;
     top: 10px;
     color: $basic-font-color;
     z-index: 10;
-    a{
-      font-size:12px;
+    a {
+      font-size: 12px;
     }
   }
 
@@ -116,11 +177,11 @@
 
   .register-active {
     .front {
-      transform: rotateY(180deg) ;
+      transform: rotateY(180deg);
     }
 
     .back {
-      transform: rotateY(360deg) ;
+      transform: rotateY(360deg);
     }
   }
 
@@ -140,17 +201,18 @@
     margin-top: 18px;
   }
 
-  .reg-main{
-    margin-top:10px;
-    h1{
-      font-size:18px;
+  .reg-main {
+    margin-top: 10px;
+    h1 {
+      font-size: 18px;
       font-weight: bolder;
-      color:$app-color;
+      color: $app-color;
     }
-    .reg-btn{
-      padding-top:20px;
+    .reg-btn {
+      padding-top: 20px;
     }
   }
+
   /******/
 
 </style>
