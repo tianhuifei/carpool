@@ -1,6 +1,6 @@
 import jsonp from 'common/js/jsonp'
 import {ROOT_URL} from 'common/js/base'
-import {options, registerUrl} from '../config'
+import {options, registerUrl, checkUserUrl} from '../config'
 import {base64} from 'vux'
 
 /**
@@ -12,5 +12,17 @@ export function register(userName, passWord) {
     param: base64.encode(JSON.stringify({userName: userName, passWord: passWord}))
   }
 
+  return jsonp(url, data, options)
+}
+
+/**
+ * 检测用户是否已被注册
+ * @param userName
+ */
+export function checkUser(userName) {
+  let url = ROOT_URL + checkUserUrl
+  let data = {
+    userName: userName
+  }
   return jsonp(url, data, options)
 }
