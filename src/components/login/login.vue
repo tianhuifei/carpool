@@ -7,10 +7,10 @@
       <div class="logo-img">
         <img src="/static/images/logo.png" alt="">
       </div>
-      <t-input type="text" title="请输入用户名" v-model="userName"></t-input>
-      <t-input type="password" title="请输入密码" v-model="passWord"></t-input>
+      <t-input type="text" title="请输入用户名" :error.sync="userNameError" v-model="userName"></t-input>
+      <t-input type="password" title="请输入密码" :error.sync="passWordError" v-model="passWord"></t-input>
       <div class="btn-box">
-        <x-button type="primary" :plain="true" :mini="true">登录</x-button>
+        <x-button type="primary" @click.native="onSubmit" :plain="true" :mini="true">登录</x-button>
       </div>
     </div>
     <div class="side back">
@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
-  import {register, checkUser} from '../../api/login/login'
+  import {register, checkUser, loginSubMit} from '../../api/login/login'
   import _ from 'lodash'
 
   export default {
@@ -43,6 +43,14 @@
       return {
         userName: '',
         passWord: '',
+        userNameError: {
+          msg: '',
+          value: true
+        },
+        passWordError: {
+          msg: '',
+          value: true
+        },
         againPassWord: '',
         againPassWordError: {
           msg: '',
@@ -66,6 +74,25 @@
       XButton
     },
     methods: {
+      onSubmit() {
+        if (!this.userName) {
+          this.userNameError = {
+            msg: '请输入用户名',
+            value: false
+          }
+          return
+        }
+        if (!this.passWord) {
+          this.passWordError = {
+            msg: '请输入密码',
+            value: false
+          }
+          return
+        }
+        loginSubMit(this.userName, this.passWord).then(() => {
+        }).catch(() => {
+        })
+      },
       onCheckUser: _.debounce(function () {
         checkUser(this.regUserName).then((res) => {
           if (res.result) {
@@ -129,6 +156,22 @@
           }
         }
         this.onCheckUser()
+      },
+      userName(val) {
+        if (val && !this.userNameError.value) {
+          this.userNameError = {
+            msg: '',
+            value: true
+          }
+        }
+      },
+      passWord(val) {
+        if (val && !this.passWordError.value) {
+          this.passWordError = {
+            msg: '',
+            value: true
+          }
+        }
       }
     }
   }
