@@ -8,6 +8,8 @@ export const startEndUrl = '/index/index/query_start_end'
 export const registerUrl = '/user/index/add_user_info'
 // 检测用户是否存在
 export const checkUserUrl = '/user/index/check_user'
+// 登录接口
+export const loginUrl = '/login/index/login'
 export const options = {
   param: 'callback'
 }
