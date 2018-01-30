@@ -6,6 +6,8 @@ export const queryAll = '/index/index/query_all'
 export const startEndUrl = '/index/index/query_start_end'
 // 注册
 export const registerUrl = '/user/index/add_user_info'
+// 检测用户是否存在
+export const checkUserUrl = '/user/index/check_user'
 export const options = {
   param: 'callback'
 }
