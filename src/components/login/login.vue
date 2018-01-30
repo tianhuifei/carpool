@@ -34,7 +34,8 @@
 <script type="text/ecmascript-6">
   import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
-  import {register} from '../../api/login/login'
+  import {register, checkUser} from '../../api/login/login'
+  import _ from 'lodash'
 
   export default {
     name: 'login',
@@ -65,6 +66,17 @@
       XButton
     },
     methods: {
+      onCheckUser: _.debounce(function () {
+        checkUser(this.regUserName).then((res) => {
+          if (res.result) {
+            this.regUserNameError = {
+              msg: '用户已存在',
+              value: false
+            }
+          }
+        }).catch(() => {
+        })
+      }, 500),
       onLoginOrReg() {
         this.register = !this.register
       },
@@ -116,6 +128,7 @@
             value: true
           }
         }
+        this.onCheckUser()
       }
     }
   }
