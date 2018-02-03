@@ -10,6 +10,10 @@ export const registerUrl = '/user/index/add_user_info'
 export const checkUserUrl = '/user/index/check_user'
 // 登录接口
 export const loginUrl = '/login/index/login'
+
+// 查询详细信息
+export const queryDetailUrl = '/index/index/query_detail'
+
 export const options = {
   param: 'callback'
 }
