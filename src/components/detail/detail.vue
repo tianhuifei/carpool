@@ -14,7 +14,10 @@
               <cell title="目的地：">{{publishInfo.endAddres}}</cell>
               <cell title="出发时间：">{{ publishInfo.startTime }}</cell>
               <cell title="发布人：">{{publishInfo.contacts}}</cell>
-              <cell title="手机号：">{{ publishInfo.contactsPhone }}</cell>
+              <cell title="手机号：">
+                <a class="phone-a" :href="'tel:' +  publishInfo.contactsPhone">{{
+                  publishInfo.contactsPhone }}</a>
+              </cell>
               <cell title="车牌号：">{{ publishInfo.carNumber }}</cell>
               <cell title="人数/空位：">{{ publishInfo.vacancy }}</cell>
               <cell title="发布时间：">{{ publishInfo.publishTime }}</cell>
@@ -36,6 +39,7 @@
   import {XHeader, Group, Cell, XTextarea} from 'vux'
   import Scroll from '../../base/scroll/scroll'
   import {mapGetters} from 'vuex'
+  import {queryDetail} from '../../api/detail/detail'
 
   export default {
     name: 'detail',
@@ -62,12 +66,20 @@
     },
     activated() {
       setTimeout(() => {
-        this._initDetail()
+        this._initDetail(this.$route.params)
       }, 20)
     },
     methods: {
-      _initDetail() {
-        this.publishInfo = this.getPublishInfo()
+      _initDetail(params) {
+        if (!params && !params.id) {
+          return
+        }
+        queryDetail(params.id).then((res) => {
+          if (res && res.data && res.data.result) {
+            this.publishInfo = res.data.result[0]
+          }
+        }).catch(() => {
+        })
       },
       setTextarea() {
         if (this.publishInfo) {
@@ -100,8 +112,12 @@
     bottom: 0;
     left: 0;
     right: 0;
+    .phone-a {
+      color: $app-color;
+    }
   }
-  .weui-cell{
-    font-size:16px;
+
+  .weui-cell {
+    font-size: 16px;
   }
 </style>
