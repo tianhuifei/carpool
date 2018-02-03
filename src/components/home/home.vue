@@ -211,7 +211,7 @@
       },
       _errorCommon() {
         this.publishList = []
-        this.$vux.toast({
+        this.$vux.toast.show({
           text: '请求发生异常',
           type: 'warn',
           position: 'middle'
