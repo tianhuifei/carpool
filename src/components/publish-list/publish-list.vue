@@ -18,18 +18,21 @@
             {{ item.vacancy }}空位
           </div>
           <div class="show-see">
-            <countup :duration=1 :start-val=0 :end-val="item.seeNum"></countup> <span class=" carpoll car-see"></span>
+            <countup :duration=1 :start-val=0 :end-val="item.seeNum"></countup>
+            <span class=" carpoll car-see"></span>
           </div>
         </div>
       </div>
       <div class="result-right">
-        <a :href="'tel:' + item.contactsPhone "></a>
-        <div class="result-phone">
-          <span class="carpoll car-phone"></span>
-        </div>
-        <div class="add-time">
-          {{ item.publishTime }}
-        </div>
+        <a class="phone" :href="'tel:' + item.contactsPhone ">
+          <div class="result-phone">
+            <span class="carpoll car-phone"></span>
+          </div>
+        </a>
+          <div class="add-time">
+            {{ item.publishTime }}
+          </div>
+
       </div>
     </div>
     <divider v-show="dividerText">{{dividerText}}</divider>
@@ -180,6 +183,9 @@
       display: flex;
       justify-items: center;
       flex-direction: column;
+      .phone {
+        display: inline-block;
+      }
       .result-phone {
         flex: 3;
         @include justify-items;
