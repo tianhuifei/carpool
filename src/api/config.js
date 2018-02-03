@@ -14,8 +14,7 @@ export const options = {
   param: 'callback'
 }
 
-// export const isProduction = process.env.NODE_ENV === 'production'
-export const isProduction = true
+export const isProduction = process.env.NODE_ENV === 'production'
 
 export let commonParams = {
   'condition.currentPage': 0,
