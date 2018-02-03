@@ -56,7 +56,6 @@
   import Scroll from 'base/scroll/scroll'
   import {presentTime, addPublish} from '../../api/publish-edit'
   import disclaimer from 'components/disclaimer/disclaimer'
-  import {isType} from '../../common/js/base'
 
   export default {
     name: 'publish-edit',
@@ -127,7 +126,6 @@
           return false
         }
         addPublish(this.carpoolInfo).then((res) => {
-          console.log(res)
         }).catch().finally()
       },
       showDisclaimer() {
@@ -226,7 +224,6 @@
           })
           return false
         }
-        console.log(isType(this.carpoolInfo.vacancy))
         if (!this.carpoolInfo.vacancy) {
           this.$vux.toast.show({
             type: 'warn',
@@ -256,7 +253,8 @@
       vertical-align: middle;
     }
   }
-  .weui-cell{
-    font-size:16px !important;
+
+  .weui-cell {
+    font-size: 16px !important;
   }
 </style>
