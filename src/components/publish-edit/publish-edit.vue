@@ -176,7 +176,7 @@
       },
       _getDate() {
         presentTime().then((res) => {
-          let dateObj = res.result
+          let dateObj = res.data.result
           this.publishObj.startDate = dateObj.dateObj.start
           this.publishObj.endDate = dateObj.dateObj.end
         }).catch().finally(() => {

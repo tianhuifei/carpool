@@ -95,7 +95,7 @@
       },
       onCheckUser: _.debounce(function () {
         checkUser(this.regUserName).then((res) => {
-          if (res.result) {
+          if (res.data.result) {
             this.regUserNameError = {
               msg: '用户已存在',
               value: false

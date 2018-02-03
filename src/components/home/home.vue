@@ -136,7 +136,7 @@
         this.currentPageIndex += 5
         setTimeout(() => {
           pullUp(this.currentPageIndex, this.publishType, this.startAddress, this.endAddres, this.apiType).then((res) => {
-            if (!res.result) {
+            if (!res.data.result) {
               this.$refs.scroll.forceUpdate()
               return
             }
@@ -198,7 +198,7 @@
         return publiObj
       },
       _normalizeResultList(res, type) {
-        let result = res.result
+        let result = res.data.result
         if (result) {
           if (type) {
             this.publishList = this.publishList.concat(this._normalizePublishInfo(result))
