@@ -1,12 +1,16 @@
 import jsonp from 'common/js/jsonp'
 import {ROOT_URL} from 'common/js/base'
-import {options} from './config'
+import {isProduction, options} from './config'
+import axios from 'axios'
 
 /**
  * 获取服务器当前时间
  */
 export function presentTime() {
   let url = '/index/index/present_time'
+  if (isProduction) {
+    return axios.post(ROOT_URL + url)
+  }
   return jsonp(ROOT_URL + url, null, options)
 }
 
@@ -30,6 +34,9 @@ export function addPublish(carpoolInfo) {
     'publish.openId': carpoolInfo.openId,
     'publish.publishId': carpoolInfo.publishId,
     'publish.publishTime': carpoolInfo.publishTime
+  }
+  if (isProduction) {
+    return axios.post(ROOT_URL + url, data)
   }
   return jsonp(ROOT_URL + url, data, options)
 }

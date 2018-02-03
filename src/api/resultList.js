@@ -1,6 +1,6 @@
-// import axios from 'axios'
+import axios from 'axios'
 import jsonp from 'common/js/jsonp'
-import {options, commonParams, carUrl, peopleUrl, queryAll, startEndUrl} from './config'
+import {options, commonParams, carUrl, peopleUrl, queryAll, startEndUrl, isProduction} from './config'
 import {ROOT_URL} from 'common/js/base'
 
 /**
@@ -13,7 +13,9 @@ export function getQueryALl() {
     'condition.currentPage': 0,
     'condition.numsPerPage': 5
   }
-
+  if (isProduction) {
+    return axios.post(url, data)
+  }
   return jsonp(url, data, options)
 }
 
@@ -30,6 +32,9 @@ export function queryStartEndApi(startAdd, endAdd) {
     'condition.startAddress': startAdd,
     'condition.endAddres': endAdd
   }
+  if (isProduction) {
+    return axios.post(url, data)
+  }
   return jsonp(url, data, options)
 }
 
@@ -44,6 +49,9 @@ export function queryPublishType(publishType) {
     'condition.publishType': publishType
   }
   let url = publishType ? peopleUrl : carUrl
+  if (isProduction) {
+    return axios.post(ROOT_URL + url, data)
+  }
   return jsonp(ROOT_URL + url, data, options)
 }
 
@@ -82,5 +90,8 @@ export function pullUp(currentPage, publishType, startAdd, endAdd, apiType) {
     'condition.startAddress': startAdd,
     'condition.endAddres': endAdd
   })
+  if (isProduction) {
+    return axios.post(ROOT_URL + url, data)
+  }
   return jsonp(ROOT_URL + url, data, options)
 }
