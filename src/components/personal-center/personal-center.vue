@@ -15,7 +15,7 @@
     </group>
     <router-view></router-view>
     <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
-      <login></login>
+      <login :is-show.sync="loginDialog"></login>
     </x-dialog>
   </div>
 </template>
