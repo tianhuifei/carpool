@@ -68,7 +68,7 @@
           removeClass(this.$refs.inputBox, 'has-label')
         }
         this.$emit('input', val)
-        if (!val) {
+        if (val && !this.error.value) {
           this.$emit('update:error', {
             msg: '',
             value: true
