@@ -39,6 +39,12 @@
 
   export default {
     name: 'login',
+    props: {
+      isShow: {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {
         userName: '',
@@ -89,7 +95,21 @@
           }
           return
         }
-        loginSubMit(this.userName, this.passWord).then(() => {
+        loginSubMit(this.userName, this.passWord).then((res) => {
+          if (res.data && res.data.result) {
+            this.$vux.toast.show({
+              text: '登录成功',
+              type: 'success'
+            })
+            setTimeout(() => {
+              this.$emit('update:isShow', false)
+            }, 1000)
+          } else {
+            this.$vux.toast.show({
+              text: '用户名或者密码错误',
+              type: 'warn'
+            })
+          }
         }).catch(() => {
         })
       },
