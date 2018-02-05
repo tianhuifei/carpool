@@ -114,6 +114,11 @@
             value: false
           }
           return false
+        } else if (!this.regUserNameError.value) {
+          this.$vux.toast.show({
+            text: this.regUserNameError.msg,
+            type: 'warn'
+          })
         }
         if (this.regUserName.length >= 20) {
           this.regUserNameError = {
@@ -132,7 +137,24 @@
         if (this.regPassWord !== this.againPassWord) {
           return false
         }
-        register(this.regUserName, this.againPassWord).then(() => {
+        register(this.regUserName, this.againPassWord).then((res) => {
+          if (res.data && res.data.result.type === 'add') {
+            this.$vux.toast.show({
+              text: '注册成功',
+              type: 'success'
+            })
+            this.onLoginOrReg()
+            this.userName = this.regUserName
+            this.passWord = this.regPassWord
+            this.regUserName = ''
+            this.regPassWord = ''
+            this.againPassWord = ''
+          } else if (res.data && res.data.result.type === 'exist') {
+            this.$vux.toast.show({
+              text: '用户已存在',
+              type: 'warn'
+            })
+          }
         }).catch(() => {
         })
       }
