@@ -1,20 +1,21 @@
-export function setCookie(c_name, value, expiredays) {
+export function setCookie(cName, value, expiredays) {
   let exdate = new Date()
   exdate.setDate(exdate.getDate() + expiredays)
-  document.cookie = c_name + "=" + decodeURI(value) +
-    ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+  document.cookie = cName + '=' + decodeURIComponent(value) +
+    ((expiredays == null) ? '' : ';expires=' + exdate.toGMTString())
 }
 
-export function getCookie(c_name) {
-  let c_start = '', c_end = ''
+export function getCookie(cName) {
+  let cStart = ''
+  let cEnd = ''
   if (document.cookie.length > 0) {
-    c_start = document.cookie.indexOf(c_name + "=")
-    if (c_start != -1) {
-      c_start = c_start + c_name.length + 1
-      c_end = document.cookie.indexOf(";", c_start)
-      if (c_end == -1) c_end = document.cookie.length
-      return decodeURI(document.cookie.substring(c_start, c_end))
+    cStart = document.cookie.indexOf(cName + '=')
+    if (cStart !== -1) {
+      cStart = cStart + cName.length + 1
+      cEnd = document.cookie.indexOf(';', cStart)
+      if (cEnd === -1) cEnd = document.cookie.length
+      return decodeURIComponent(document.cookie.substring(cStart, cEnd))
     }
   }
-  return ""
+  return ''
 }
