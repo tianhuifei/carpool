@@ -1,10 +1,11 @@
 <template>
   <div class="body-main">
     <div class="my-header">
-      <p class="center" v-if="user">
+      <p class="center portrait" v-if="user">
         <img :src="url" alt="">
+        <span>{{ user.userName }}</span>
       </p>
-      <p class="center">
+      <p class="center" v-if="!user">
         <x-button @click.native="onSubmitBtn" type="primary" :mini="true">登录</x-button>
       </p>
     </div>
@@ -24,6 +25,7 @@
   import {Group, Cell, XButton, XDialog} from 'vux'
   import {mapMutations, mapGetters} from 'vuex'
   import Login from 'components/login/login'
+  import {getUserInfo} from '../../common/js/base'
 
   export default {
     name: 'personal-center',
@@ -48,7 +50,7 @@
         this.loginDialog = true
       },
       _getUser() {
-        this.setUser(JSON.parse(localStorage.getItem('user')))
+        this.setUser(getUserInfo())
       },
       ...mapMutations({
         setUser: 'SET_USER'
@@ -75,6 +77,20 @@
     align-items: center;
     justify-items: center;
     background-color: $app-color;
+    .portrait{
+      span{
+        @include text-overflow();
+        position: absolute;
+        display:inline-block;
+        font-size:12px;
+        text-align: center;
+        color:$color-white;
+        left:50%;
+        bottom:-20px;
+        transform:translateX(-50%);
+        width:100%;
+      }
+    }
     .center {
       position: absolute;
       top: 50%;
