@@ -34,7 +34,9 @@ export default new Router({
     {
       path: '/publish/:id/:type',
       name: 'Publish',
-      component: PublishEdit
+      components: {
+        PublishEdit: PublishEdit
+      }
     }
   ]
 })

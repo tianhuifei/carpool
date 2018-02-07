@@ -112,10 +112,12 @@
     },
     computed: {},
     mounted() {
-    },
-    activated() {
       this._initPublish()
       this._getDate()
+    },
+    activated() {
+      // this._initPublish()
+      // this._getDate()
     },
     methods: {
       submitPublish() {
@@ -126,6 +128,20 @@
           return false
         }
         addPublish(this.carpoolInfo).then((res) => {
+          if (res.data && res.data.result) {
+            this.$vux.toast.show({
+              type: 'success',
+              text: '发布成功'
+            })
+            setTimeout(() => {
+              this.$router.go(-1)
+            }, 500)
+          } else {
+            this.$vux.toast.show({
+              type: 'warn',
+              text: '发布失败'
+            })
+          }
         }).catch().finally()
       },
       showDisclaimer() {
@@ -232,6 +248,11 @@
           return false
         }
         return true
+      },
+      _setCarPoolInfoEmpty() {
+        for (let item in this.carpoolInfo) {
+          this.carpoolInfo[item] = ''
+        }
       }
     }
   }

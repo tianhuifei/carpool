@@ -3,6 +3,7 @@
     <keep-alive>
         <router-view></router-view>
     </keep-alive>
+    <router-view name="PublishEdit"></router-view>
     <tab-bar></tab-bar>
   </div>
 </template>
