@@ -11,8 +11,6 @@ export function isType(value) {
  * @returns {*}
  */
 export function getUserInfo() {
-  let user = JSON.parse(localStorage.getItem('user'))
-  if (user) return user
-  let cookieUser = JSON.parse(getCookie('userInfo'))
-  if (cookieUser) return cookieUser
+  let user = JSON.parse(localStorage.getItem('user')) || JSON.parse(getCookie('userInfo') ? getCookie('userInfo') : null)
+  return user
 }
