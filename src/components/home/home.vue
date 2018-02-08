@@ -220,6 +220,13 @@
       ...mapMutations({
         setPublishInfo: 'SET_PUBLISINFO'
       })
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        if (from.name === 'Publish' && from.params.type === 'publish') {
+          vm.queryAll()
+        }
+      })
     }
   }
 </script>
