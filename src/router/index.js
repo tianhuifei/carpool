@@ -7,8 +7,7 @@ import PersonalCenter from 'components/personal-center/personal-center'
 import MyPublish from 'components/my-publish/my-publish'
 
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -40,3 +39,7 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  next()
+})
+export default router
