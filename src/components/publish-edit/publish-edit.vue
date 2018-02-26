@@ -133,6 +133,9 @@
               type: 'success',
               text: '发布成功'
             })
+            if (this.$route.meta && !this.$route.meta.refresh) {
+              this.$route.meta.refresh = true
+            }
             setTimeout(() => {
               this.$router.go(-1)
             }, 500)
