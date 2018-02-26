@@ -1,8 +1,10 @@
 @import "reset";
 @import "base-standard";
+
 html, body {
   min-height: 100%;
 }
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -11,38 +13,43 @@ body {
   min-height: 100%;
   background: $app-bg-color;
 }
+
 // page页样式
-.page-style{
+.page-style {
   box-sizing: content-box;
   position: fixed;
-  z-index:$z-index-20;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  padding-top:46px;
-  background:$app-bg-color;
+  z-index: $z-index-20;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 46px;
+  background: $app-bg-color;
 }
-.page-content{
+
+.page-content {
   position: absolute;
   top: 46px;
   bottom: 0;
   left: 0;
   right: 0;
 }
+
 // 过场动画
 .page-enter-active, .page-leave-active {
   transition: all .3s
 }
-.page-enter, .page-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+
+.page-enter, .page-leave-to /* .fade-leave-active in below version 2.1.8 */
+{
   transform: translate3d(100%, 0, 0)
 }
 
 .text-white {
-  color:$color-white !important;
+  color: $color-white !important;
 }
 
-.people-for-car,.car-for-people{
+.people-for-car, .car-for-people {
   display: block;
   font-size: 12px;
   color: #FFF;
@@ -52,57 +59,64 @@ body {
   height: 15px;
   line-height: 15px;
 }
-.car-for-people{
-  background-color:$car-to-people-color;
+
+.car-for-people {
+  background-color: $car-to-people-color;
 }
-.people-for-car{
-  background-color:$people-to-car-color;
+
+.people-for-car {
+  background-color: $people-to-car-color;
 }
+
 // 重置header样式
 .vux-header {
   z-index: 99;
-  position:fixed !important;
-  top:0;
-  right:0;
-  left:0;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  left: 0;
   background: $app-color !important;
-   .vux-header-left a,  .vux-header-left button,  .vux-header-right a,  .vux-header-right button{
-     color: $color-white !important;
-   }
-   .vux-header-left .left-arrow:before{
-      border-color:$color-white !important;
+  .vux-header-left a, .vux-header-left button, .vux-header-right a, .vux-header-right button {
+    color: $color-white !important;
+  }
+  .vux-header-left .left-arrow:before {
+    border-color: $color-white !important;
   }
 }
 
-.vux-divider{
+.vux-divider {
   font-size: 12px !important;
 }
 
-.textarea textarea{
-  background-color:$color-white;
+.textarea textarea {
+  background-color: $color-white;
 }
 
-.body-main,.home-main {
+.body-main, .home-main {
   position: fixed;
   top: 0;
-  bottom: $tab-bar-height;
+  padding-bottom: $tab-bar-height;
+  z-index: 15;
+  bottom: 0;
   width: 100%;
   .home-main-content {
     height: 100%;
     overflow: hidden;
   }
 }
- // 登录dialog无背景
+
+// 登录dialog无背景
 .login-box {
   .weui-dialog {
-    overflow:visible !important;
+    overflow: visible !important;
     background-color: transparent !important;
   }
 }
 
-.vux-slider > .vux-indicator > a > .vux-icon-dot.active, .vux-slider .vux-indicator-right > a > .vux-icon-dot.active{
+.vux-slider > .vux-indicator > a > .vux-icon-dot.active, .vux-slider .vux-indicator-right > a > .vux-icon-dot.active {
   background-color: $app-color !important;
 }
-.vux-label{
-  font-size:14px !important;
+
+.vux-label {
+  font-size: 14px !important;
 }

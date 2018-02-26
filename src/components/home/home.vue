@@ -236,6 +236,12 @@
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
 
+  .home-main {
+    .list-wrapper {
+      bottom: $tab-bar-height;
+    }
+  }
+
   .main-search-box {
     margin-bottom: 5px;
     width: 100%;
