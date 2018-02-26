@@ -47,6 +47,7 @@
   import {getQueryALl, queryStartEndApi, queryPublishType, pullUp} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
+  import {numsPerPage} from '../../api/config'
 
   export default {
     components: {
@@ -133,7 +134,7 @@
         }, 1000)
       },
       onPullingUp() {
-        this.currentPageIndex += 5
+        this.currentPageIndex += numsPerPage
         setTimeout(() => {
           pullUp(this.currentPageIndex, this.publishType, this.startAddress, this.endAddres, this.apiType).then((res) => {
             if (!res.data.result) {

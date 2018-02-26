@@ -1,6 +1,6 @@
 import axios from 'axios'
 import jsonp from 'common/js/jsonp'
-import {options, commonParams, carUrl, peopleUrl, queryAll, startEndUrl, isProduction} from './config'
+import {options, commonParams, carUrl, peopleUrl, queryAll, startEndUrl, isProduction, numsPerPage} from './config'
 import {ROOT_URL} from 'common/js/base'
 
 /**
@@ -11,7 +11,7 @@ export function getQueryALl() {
   const url = ROOT_URL + queryAll
   const data = {
     'condition.currentPage': 0,
-    'condition.numsPerPage': 5
+    'condition.numsPerPage': numsPerPage
   }
   if (isProduction) {
     return axios.post(url, data)
@@ -28,7 +28,7 @@ export function queryStartEndApi(startAdd, endAdd) {
   const url = ROOT_URL + startEndUrl
   let data = {
     'condition.currentPage': 0,
-    'condition.numsPerPage': 5,
+    'condition.numsPerPage': numsPerPage,
     'condition.startAddress': startAdd,
     'condition.endAddres': endAdd
   }
@@ -45,7 +45,7 @@ export function queryStartEndApi(startAdd, endAdd) {
 export function queryPublishType(publishType) {
   let data = {
     'condition.currentPage': 0,
-    'condition.numsPerPage': 5,
+    'condition.numsPerPage': numsPerPage,
     'condition.publishType': publishType
   }
   let url = publishType ? peopleUrl : carUrl

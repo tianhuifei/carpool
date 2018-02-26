@@ -14,6 +14,9 @@ export const loginUrl = '/login/index/login'
 // 查询详细信息
 export const queryDetailUrl = '/index/index/query_detail'
 
+// 显示数量
+export const numsPerPage = 6
+
 export const options = {
   param: 'callback'
 }
@@ -22,7 +25,7 @@ export const isProduction = process.env.NODE_ENV === 'production'
 
 export let commonParams = {
   'condition.currentPage': 0,
-  'condition.numsPerPage': 5,
+  'condition.numsPerPage': numsPerPage,
   'condition.publishType': 0,
   'condition.startAddress': '',
   'condition.endAddres': ''
