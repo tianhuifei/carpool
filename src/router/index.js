@@ -33,7 +33,10 @@ let router = new Router({
     {
       path: '/publish/:id/:type',
       name: 'Publish',
-      component: PublishEdit
+      component: PublishEdit,
+      meta: {
+        refresh: false
+      }
     }
   ]
 })
