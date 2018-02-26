@@ -225,7 +225,8 @@
     beforeRouteEnter(to, from, next) {
       next(vm => {
         if (from.name === 'Publish' && from.params.type === 'publish' && from.meta.refresh) {
-          vm.queryAll()
+          setTimeout(vm.queryAll(), 500)
+          from.meta.refresh = false
         }
       })
     }
