@@ -14,6 +14,9 @@ export const loginUrl = '/login/index/login'
 // 查询详细信息
 export const queryDetailUrl = '/index/index/query_detail'
 
+// 加载个人发布数据url
+export const queryMyDataUrl = '/publish/publish/show_my_publish'
+
 // 显示数量
 export const numsPerPage = 6
 

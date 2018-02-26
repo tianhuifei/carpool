@@ -14,7 +14,9 @@
       </cell>
       <cell title="关于" is-link><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
     </group>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
       <login :is-show.sync="loginDialog"></login>
     </x-dialog>
@@ -77,18 +79,18 @@
     align-items: center;
     justify-items: center;
     background-color: $app-color;
-    .portrait{
-      span{
+    .portrait {
+      span {
         @include text-overflow();
         position: absolute;
-        display:inline-block;
-        font-size:12px;
+        display: inline-block;
+        font-size: 12px;
         text-align: center;
-        color:$color-white;
-        left:50%;
-        bottom:-20px;
-        transform:translateX(-50%);
-        width:100%;
+        color: $color-white;
+        left: 50%;
+        bottom: -20px;
+        transform: translateX(-50%);
+        width: 100%;
       }
     }
     .center {
