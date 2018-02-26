@@ -35,6 +35,8 @@
   import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
   import {register, checkUser, loginSubMit} from '../../api/login/login'
+  import {mapMutations} from 'vuex'
+  import {getUserInfo} from '../../common/js/base'
   import _ from 'lodash'
 
   export default {
@@ -103,6 +105,7 @@
             })
             setTimeout(() => {
               this.$emit('update:isShow', false)
+              this.setUser(getUserInfo())
             }, 1000)
           } else {
             this.$vux.toast.show({
@@ -177,7 +180,10 @@
           }
         }).catch(() => {
         })
-      }
+      },
+      ...mapMutations({
+        setUser: 'SET_USER'
+      })
     },
     watch: {
       inputValue(val) {
