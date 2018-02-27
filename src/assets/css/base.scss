@@ -95,9 +95,9 @@ body {
 .body-main, .home-main {
   position: fixed;
   top: 0;
-  padding-bottom: $tab-bar-height;
+  //padding-bottom: $tab-bar-height;
   z-index: 15;
-  bottom: 0;
+  bottom:$tab-bar-height;
   width: 100%;
   .home-main-content {
     height: 100%;
