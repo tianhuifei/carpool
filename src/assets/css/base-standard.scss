@@ -34,24 +34,24 @@ $color-error: #ff1100;
 $tab-bar-height: 52px;
 
 //liability
-$liability-color:#576b95;
+$liability-color: #576b95;
 //省略号
-@mixin text-overflow($row: 1){
+@mixin text-overflow($row: 1) {
   line-clamp: $row;
-  overflow:hidden; /*内容超出宽度时隐藏超出部分的内容 */
-  text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
-  white-space:nowrap; /*不换行 */
+  overflow: hidden; /*内容超出宽度时隐藏超出部分的内容 */
+  text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+  white-space: nowrap; /*不换行 */
 }
 
 //flex 垂直水平居中
-@mixin justify-items{
-  display:flex;
+@mixin justify-items {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 // z-index 定义
 //tabbar zindex 10
-$z-index-10:10;
-$z-index-20:20;
-$z-index-30:30;
+$z-index-10: 10;
+$z-index-20: 20;
+$z-index-30: 30;
