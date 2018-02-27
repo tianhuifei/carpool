@@ -39,7 +39,9 @@
     },
     activated() {
       setTimeout(() => {
-        this._getUser()
+        if (!this.user) {
+          this._getUser()
+        }
       }, 20)
     },
     computed: {
