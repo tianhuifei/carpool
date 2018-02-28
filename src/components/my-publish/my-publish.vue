@@ -65,6 +65,14 @@
     methods: {
       _loadData() {
         queryMyData().then((res) => {
+          let result = res.data.result || null
+          if (result && !result.value) {
+            this.$vux.toast.show({
+              type: 'warn',
+              text: result.msg
+            })
+            return false
+          }
           this._normalizeResultList(res)
         }).catch()
       },
