@@ -4,14 +4,14 @@
       <x-header :left-options="{backText: ''}">我的发布</x-header>
       <div class="page-content">
         <scroll>
-          <t-card :footer="true" v-for="item in list" :key="item.id">
+          <t-card :footer="true" v-for="(item,key,index) in list" :key="key">
             <div class="card-content">
               <div class="card-content-left">
                 <div class="card-content-left-title">
                   <p>{{item.startAddress}} - {{item.endAddres}}</p>
                 </div>
                 <div class="card-content-left-date">
-                  发布时间： <span>{{item.publishTime}}</span>
+                  发布时间：<span>{{item.publishTime}}</span>
                 </div>
               </div>
               <div class="card-content-right">
