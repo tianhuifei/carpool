@@ -1,12 +1,16 @@
 <template>
   <div class="card-box">
-    <slot class="card-header" name="header"></slot>
+    <div v-if="title" class="card-header">
+      <slot class="" name="header"></slot>
+    </div>
     <div class="card-content">
       <div class="card-content-inner">
-        <slot name=""></slot>
+        <slot></slot>
       </div>
     </div>
-    <slot class="card-footer" name="footer"></slot>
+    <div v-if="footer" class="card-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -15,8 +19,12 @@
     name: 'T-card',
     props: {
       title: {
-        type: String,
-        default: null
+        type: Boolean,
+        default: false
+      },
+      footer: {
+        type: Boolean,
+        default: false
       }
     }
   }
@@ -24,7 +32,8 @@
 
 <style scoped lang="scss">
   @import '../../assets/css/base-standard';
-
+  $header-footer-size: 13px;
+  $content-size: 14px;
   .card-box {
     position: relative;
     margin: 10px 15px;
@@ -33,7 +42,7 @@
     background-clip: padding-box;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     .card-content {
-      font-size: 14px;
+      font-size: $content-size;
     }
     .card-footer, .card-header {
       box-sizing: border-box;
@@ -43,6 +52,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size:$header-footer-size;
+      color: $basic-font-color;
     }
     .card-footer::before, .card-header::after {
       position: absolute;
