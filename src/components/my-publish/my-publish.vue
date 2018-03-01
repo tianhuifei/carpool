@@ -22,13 +22,15 @@
               </div>
               <div class="card-btn-box" slot="footer">
                 <div>
-                  <x-button mini type="primary">编辑</x-button>
+                  <x-button mini type="primary" :link="{ name: 'Publish', params: { id: item.publishId,type: 'edit' }}">
+                    编辑
+                  </x-button>
                 </div>
                 <div>
                   <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
                 </div>
                 <div>
-                  <x-button mini type="warn">删除</x-button>
+                  <x-button @click.native="onDelete(item.publishId, index)" mini type="warn">删除</x-button>
                 </div>
               </div>
             </t-card>
@@ -42,7 +44,7 @@
 
 <script type="text/ecmascript-6">
   import {XHeader, XButton} from 'vux'
-  import {queryMyData} from '../../api/myPublish/myPublish'
+  import {queryMyData, detailInfo} from '../../api/myPublish/myPublish'
   import TCard from '../../base/T-card/T-card'
   import {createPublishInfo} from '../../common/js/publishInfo'
   import Scroll from 'base/scroll/scroll'
@@ -96,10 +98,29 @@
       },
       onPullingDown() {
         setTimeout(() => {
-          this._loadData()
+          this._loadData(true)
         }, 1000)
       },
-      _loadData() {
+      onDelete(id, index) {
+        let that = this
+        this.$vux.confirm.show({
+          title: '操作提示',
+          content: '确定要删除此信息吗？',
+          confirmext: '删除',
+          cancelText: '取消',
+          onConfirm() {
+            detailInfo(id).then((res) => {
+              if (res.data.result) {
+                that.list.splice(index, 1)
+              }
+            }).catch()
+          }
+        })
+      },
+      _loadData(isRefresh) {
+        if (this.list.length && !isRefresh) {
+          return
+        }
         queryMyData().then((res) => {
           let result = res.data.result || null
           if (result && isType(result) === '[object Object]' && !result.value) {

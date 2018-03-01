@@ -17,6 +17,12 @@ export const queryDetailUrl = '/index/index/query_detail'
 // 加载个人发布数据url
 export const queryMyDataUrl = '/publish/publish/show_my_publish'
 
+// 查询需要编辑的信息
+export const queryEditUrl = '/index/index/query_edit_info'
+
+// 删除已发布的数据
+export const detailInfoUrl = '/index/index/delete_info'
+
 // 显示数量
 export const numsPerPage = 6
 
