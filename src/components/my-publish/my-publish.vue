@@ -3,33 +3,35 @@
     <div class="page-style">
       <x-header :left-options="{backText: ''}">我的发布</x-header>
       <div class="page-content">
-        <scroll>
-          <t-card :footer="true" v-for="(item,key,index) in list" :key="key">
-            <div class="card-content">
-              <div class="card-content-left">
-                <div class="card-content-left-title">
-                  <p>{{item.startAddress}} - {{item.endAddres}}</p>
+        <scroll :data="list" ref="scroll">
+          <div class="list-box">
+            <t-card :footer="true" v-for="(item,key,index) in list" :key="key">
+              <div class="card-content">
+                <div class="card-content-left">
+                  <div class="card-content-left-title">
+                    <p>{{item.startAddress}} - {{item.endAddres}}</p>
+                  </div>
+                  <div class="card-content-left-date">
+                    发布时间：<span>{{item.publishTime}}</span>
+                  </div>
                 </div>
-                <div class="card-content-left-date">
-                  发布时间：<span>{{item.publishTime}}</span>
+                <div class="card-content-right">
+                  <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
                 </div>
               </div>
-              <div class="card-content-right">
-                <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
+              <div class="card-btn-box" slot="footer">
+                <div>
+                  <x-button mini type="primary">编辑</x-button>
+                </div>
+                <div>
+                  <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
+                </div>
+                <div>
+                  <x-button mini type="warn">删除</x-button>
+                </div>
               </div>
-            </div>
-            <div class="card-btn-box" slot="footer">
-              <div>
-                <x-button mini type="primary">编辑</x-button>
-              </div>
-              <div>
-                <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
-              </div>
-              <div>
-                <x-button mini type="warn">删除</x-button>
-              </div>
-            </div>
-          </t-card>
+            </t-card>
+          </div>
         </scroll>
 
       </div>
@@ -43,6 +45,7 @@
   import TCard from '../../base/T-card/T-card'
   import {createPublishInfo} from '../../common/js/publishInfo'
   import Scroll from 'base/scroll/scroll'
+  import {isType} from '../../common/js/base'
 
   export default {
     name: 'my-publish',
@@ -66,7 +69,7 @@
       _loadData() {
         queryMyData().then((res) => {
           let result = res.data.result || null
-          if (result && !result.value) {
+          if (result && isType(result) === '[object Object]' && !result.value) {
             this.$vux.toast.show({
               type: 'warn',
               text: result.msg
@@ -101,7 +104,10 @@
 
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
-
+.list-box{
+  padding-top:1px;
+  padding-bottom:10px;
+}
   $card-content-left-title: 14px;
   .card-content {
     display: flex;
