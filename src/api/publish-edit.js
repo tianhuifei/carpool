@@ -1,6 +1,6 @@
 import jsonp from 'common/js/jsonp'
 import {ROOT_URL} from 'common/js/base'
-import {isProduction, options} from './config'
+import {isProduction, options, queryEditUrl} from './config'
 import axios from 'axios'
 
 /**
@@ -39,4 +39,19 @@ export function addPublish(carpoolInfo) {
     return axios.post(ROOT_URL + url, data)
   }
   return jsonp(ROOT_URL + url, data, options)
+}
+
+/**
+ * 查询需要编辑的信息
+ * @param id
+ */
+export function queryEdit(id) {
+  let url = ROOT_URL + queryEditUrl
+  let data = {
+    'condition.publishId': id
+  }
+  if (isProduction) {
+    return axios.post(url, data)
+  }
+  return jsonp(url, data, options)
 }

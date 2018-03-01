@@ -54,7 +54,7 @@
 <script type="text/ecmascript-6">
   import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon, XButton} from 'vux'
   import Scroll from 'base/scroll/scroll'
-  import {presentTime, addPublish} from '../../api/publish-edit'
+  import {presentTime, addPublish, queryEdit} from '../../api/publish-edit'
   import disclaimer from 'components/disclaimer/disclaimer'
 
   export default {
@@ -190,6 +190,14 @@
         this.title = this.$route.params.id === '-1' ? '发布' : '编辑'
         this.id = this.$route.params.id
         this.type = this.$route.params.type
+        if (this.id !== '-1' && this.type === 'edit') {
+          this._queryEdit(this.id)
+        }
+      },
+      _queryEdit(id) {
+        queryEdit(id).then(() => {
+
+        }).catch()
       },
       _getDate() {
         presentTime().then((res) => {
