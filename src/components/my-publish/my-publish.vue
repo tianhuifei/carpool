@@ -3,7 +3,8 @@
     <div class="page-style">
       <x-header :left-options="{backText: ''}">我的发布</x-header>
       <div class="page-content">
-        <scroll :data="list" ref="scroll">
+        <scroll :data="list" ref="scroll" :pullUpLoad="pullUpLoadObj"
+                :pullDownRefresh="pullDownRefreshObj" @pullingDown="onPullingDown" @pullingUp="onPullingUp">
           <div class="list-box">
             <t-card :footer="true" v-for="(item,key,index) in list" :key="key">
               <div class="card-content">
@@ -46,12 +47,26 @@
   import {createPublishInfo} from '../../common/js/publishInfo'
   import Scroll from 'base/scroll/scroll'
   import {isType} from '../../common/js/base'
+  import {numsPerPage} from '../../api/config'
 
   export default {
     name: 'my-publish',
     data() {
       return {
-        list: []
+        list: [],
+        currentPageIndex: 0,
+        pullDownRefreshObj: {
+          threshold: parseInt(50),
+          stop: parseInt(40),
+          txt: '刷新成功'
+        },
+        pullUpLoadObj: {
+          threshold: parseInt(50),
+          txt: {
+            more: '加载更多',
+            noMore: '已经到底了！'
+          }
+        }
       }
     },
     components: {
@@ -66,6 +81,24 @@
       }, 20)
     },
     methods: {
+      onPullingUp() {
+        this.currentPageIndex += numsPerPage
+        setTimeout(() => {
+          queryMyData(this.currentPageIndex).then((res) => {
+            if (!res.data.result) {
+              this.$refs.scroll.forceUpdate()
+              return
+            }
+            this._normalizeResultList(res, true)
+            this.$refs.scroll.forceUpdate(true)
+          }).catch()
+        }, 1500)
+      },
+      onPullingDown() {
+        setTimeout(() => {
+          this._loadData()
+        }, 1000)
+      },
       _loadData() {
         queryMyData().then((res) => {
           let result = res.data.result || null
@@ -104,10 +137,12 @@
 
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
-.list-box{
-  padding-top:1px;
-  padding-bottom:10px;
-}
+
+  .list-box {
+    padding-top: 1px;
+    padding-bottom: 10px;
+  }
+
   $card-content-left-title: 14px;
   .card-content {
     display: flex;
