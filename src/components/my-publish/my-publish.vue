@@ -156,6 +156,14 @@
         } else {
           this.list = []
         }
+      },
+      beforeRouteEnter(to, from, next) {
+        next(vm => {
+          if (from.name === 'Publish' && from.params.type === 'edit' && from.meta.refresh) {
+            setTimeout(vm._loadData(), 500)
+            from.meta.refresh = false
+          }
+        })
       }
     }
   }
