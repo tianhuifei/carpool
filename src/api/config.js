@@ -23,6 +23,9 @@ export const queryEditUrl = '/index/index/query_edit_info'
 // 删除已发布的数据
 export const detailInfoUrl = '/index/index/delete_info'
 
+// 更新已发布的数据
+export const updateInfoUrl = '/publish/publish/update_info'
+
 // 显示数量
 export const numsPerPage = 6
 
