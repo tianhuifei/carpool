@@ -6,7 +6,7 @@
         <scroll :data="list" ref="scroll" :pullUpLoad="pullUpLoadObj"
                 :pullDownRefresh="pullDownRefreshObj" @pullingDown="onPullingDown" @pullingUp="onPullingUp">
           <div class="list-box">
-            <t-card :footer="true" v-for="(item,key,index) in list" :key="key">
+            <t-card :footer="true" v-for="(item, index) in list" :key="index">
               <div class="card-content">
                 <div class="card-content-left">
                   <div class="card-content-left-title">
@@ -30,7 +30,7 @@
                   <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
                 </div>
                 <div>
-                  <x-button @click.native="onDelete(item.publishId, index)" mini type="warn">删除</x-button>
+                  <x-button @click.native="onDelete(item.publishId, index)"  mini type="warn">删除</x-button>
                 </div>
               </div>
             </t-card>
@@ -111,11 +111,16 @@
           onConfirm() {
             detailInfo(id).then((res) => {
               if (res.data.result) {
-                that.list.splice(index, 1)
+                that._deleteItem(index)
               }
             }).catch()
           }
         })
+      },
+      _deleteItem(index) {
+        if (this.list.length) {
+          this.list.splice(index, 1)
+        }
       },
       _loadData(isRefresh) {
         if (this.list.length && !isRefresh) {
