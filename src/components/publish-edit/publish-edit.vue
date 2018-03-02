@@ -14,7 +14,7 @@
                        placeholder="请输入出发地"></x-input>
               <x-input :is-type="isEndAddress" v-model="carpoolInfo.endAddres" :required="true" title="目的地："
                        placeholder="请输入目的地"></x-input>
-              <datetime @on-change="setDateTime" :required="true"
+              <datetime v-model="publishObj.startDateTime" @on-change="setDateTime" :required="true"
                         :title="publishObj.setDateTitle"
                         format="YYYY-M-DD HH:mm"
                         :start-date="publishObj.startDate" :end-date="publishObj.endDate" year-row="{value}年"
@@ -41,7 +41,11 @@
               <a @click="showDisclaimer" href="javascript:void(0)">《免责声明》</a>
             </div>
             <div class="" style="padding:5px 10px;padding-bottom:15px;">
-              <x-button @click.native="submitPublish" :disabled="!publishObj.submitBtn" type="primary">立即发布</x-button>
+              <x-button v-if="isSubmit" @click.native="submitPublish" :disabled="!publishObj.submitBtn" type="primary">
+                立即发布
+              </x-button>
+              <x-button v-if="!isSubmit" @click.native="onUpdate" :disabled="!publishObj.submitBtn" type="primary">更新
+              </x-button>
             </div>
           </div>
         </scroll>
@@ -54,13 +58,15 @@
 <script type="text/ecmascript-6">
   import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon, XButton} from 'vux'
   import Scroll from 'base/scroll/scroll'
-  import {presentTime, addPublish, queryEdit} from '../../api/publish-edit'
+  import {presentTime, addPublish, queryEdit, updateInfo} from '../../api/publish-edit'
   import disclaimer from 'components/disclaimer/disclaimer'
+  import {formatTime} from '../../common/js/base'
 
   export default {
     name: 'publish-edit',
     data() {
       return {
+        isSubmit: true,
         showHideOnBlur: true,
         publishObj: {
           checkPhone: false,
@@ -74,7 +80,8 @@
           startDate: '',
           endDate: '',
           liabilityTitle: '',
-          liability: false
+          liability: false,
+          startDateTime: ''
         },
         typeList: [['车找人', '人找车']],
         title: '',
@@ -120,6 +127,34 @@
       // this._getDate()
     },
     methods: {
+      onUpdate() {
+        if (event._constructed) {
+          return
+        }
+        if (!this._checkCondition()) {
+          return false
+        }
+        updateInfo(this.carpoolInfo).then((res) => {
+          if (res.data && res.data.result) {
+            this.$vux.toast.show({
+              type: 'success',
+              text: '更新成功'
+            })
+
+            if (this.$route.meta && !this.$route.meta.refresh) {
+              this.$route.meta.refresh = true
+            }
+            setTimeout(() => {
+              this.$router.go(-1)
+            }, 500)
+          } else {
+            this.$vux.toast.show({
+              type: 'warn',
+              text: '更新失败'
+            })
+          }
+        }).catch()
+      },
       submitPublish() {
         if (event._constructed) {
           return
@@ -191,12 +226,35 @@
         this.id = this.$route.params.id
         this.type = this.$route.params.type
         if (this.id !== '-1' && this.type === 'edit') {
+          this.isSubmit = false
           this._queryEdit(this.id)
         }
       },
       _queryEdit(id) {
-        queryEdit(id).then(() => {
-
+        queryEdit(id).then((res) => {
+          let editItem = res.data.result
+          if (!editItem && !editItem) {
+            return
+          }
+          editItem = editItem[0]
+          this.publishObj.publishValue = [editItem.publishType ? '人找车' : '车找人']
+          this.carpoolInfo.publishType = editItem.publishType
+          this.carpoolInfo.startAddress = editItem.startAddress
+          this.publishObj.checkStartAdd = editItem.startAddress
+          this.carpoolInfo.endAddres = editItem.endAddres
+          this.publishObj.checkEndAdd = editItem.endAddres
+          this.carpoolInfo.contacts = editItem.contacts
+          this.carpoolInfo.contactsPhone = editItem.contactsPhone
+          this.publishObj.checkPhone = editItem.contactsPhone
+          this.carpoolInfo.carNumber = editItem.carNumber
+          this.carpoolInfo.vacancy = editItem.vacancy
+          this.carpoolInfo.remarks = editItem.remarks
+          let startTimes = formatTime(new Date(editItem.startTime))
+          this.carpoolInfo.startDate = startTimes.split(' ')[0]
+          this.carpoolInfo.startTime = startTimes.split(' ')[1]
+          this.carpoolInfo.openId = editItem.openId
+          this.carpoolInfo.publishId = editItem.publishId
+          this.publishObj.startDateTime = startTimes.split(' ')[0] + ' ' + startTimes.split(' ')[1]
         }).catch()
       },
       _getDate() {
