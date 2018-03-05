@@ -5,6 +5,10 @@ import Detail from 'components/detail/detail'
 import PublishEdit from 'components/publish-edit/publish-edit'
 import PersonalCenter from 'components/personal-center/personal-center'
 import MyPublish from 'components/my-publish/my-publish'
+import Version from 'components/version/version'
+import FeedBack from 'components/feed-back/feed-back'
+import contactMe from 'components/contact-me/contact-me'
+import About from 'components/about/about'
 
 Vue.use(Router)
 let router = new Router({
@@ -20,8 +24,30 @@ let router = new Router({
       component: PersonalCenter,
       children: [
         {
-          path: ':id',
+          path: 'mypublish',
           component: MyPublish
+        },
+        {
+          path: 'about',
+          component: About,
+          meta: {title: '关于'},
+          children: [
+            {
+              path: 'version',
+              component: Version,
+              meta: {title: '版本介绍'}
+            },
+            {
+              path: 'feedback',
+              component: FeedBack,
+              meta: {title: '意见反馈'}
+            },
+            {
+              path: 'contactme',
+              component: contactMe,
+              meta: {title: '联系我'}
+            }
+          ]
         }
       ]
     },

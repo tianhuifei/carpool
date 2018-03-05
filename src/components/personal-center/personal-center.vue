@@ -10,9 +10,9 @@
       </p>
     </div>
     <group gutter="5px">
-      <cell title="我的发布" is-link link="/personal/1123"><span slot="icon" class="carpoll car-fabu icon-color"></span>
+      <cell title="我的发布" is-link link="/personal/mypublish"><span slot="icon" class="carpoll car-fabu icon-color"></span>
       </cell>
-      <cell title="关于" is-link><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
+      <cell title="关于" is-link link="/personal/about"><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
     </group>
     <keep-alive>
       <router-view></router-view>
