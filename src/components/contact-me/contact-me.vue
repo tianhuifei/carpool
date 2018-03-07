@@ -1,5 +1,4 @@
 <template>
-  <transition name="page">
     <div class="page-style">
       <div class="page-content">
         <div class="contact-box">
@@ -11,7 +10,6 @@
         </div>
       </div>
     </div>
-  </transition>
 </template>
 
 <script type="text/ecmascript-6">

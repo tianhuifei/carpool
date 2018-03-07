@@ -1,5 +1,4 @@
 <template>
-  <transition name="page">
     <div class="page-style">
       <div class="page-content">
         <scroll :data="versionInfo">
@@ -9,7 +8,6 @@
         </scroll>
       </div>
     </div>
-  </transition>
 </template>
 
 <script type="text/ecmascript-6">

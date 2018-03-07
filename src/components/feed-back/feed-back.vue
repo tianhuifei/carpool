@@ -1,5 +1,4 @@
 <template>
-  <transition name="page">
     <div class="page-style">
       <div class="page-content">
         <group title="问题或意见">
@@ -14,7 +13,6 @@
 
       </div>
     </div>
-  </transition>
 </template>
 
 <script type="text/ecmascript-6">
