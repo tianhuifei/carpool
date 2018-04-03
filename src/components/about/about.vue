@@ -1,7 +1,7 @@
 <template>
   <transition name="page">
     <div class="page-style">
-      <x-header :transition="transitionName" :left-options="{backText: ''}">{{ title }}{{transitionName}}</x-header>
+      <x-header :transition="transitionName" :left-options="{backText: ''}">{{ title }}</x-header>
       <div class="page-content">
         <group gutter="5px">
           <cell title="版本介绍" is-link link="/personal/about/version"></cell>
