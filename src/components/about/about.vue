@@ -8,7 +8,6 @@
           <cell title="意见反馈" is-link link="/personal/about/feedback"></cell>
           <cell title="联系我" is-link link="/personal/about/contactme"></cell>
         </group>
-        {{transitionName}}
       </div>
       <transition :name="transitionName">
         <keep-alive>
