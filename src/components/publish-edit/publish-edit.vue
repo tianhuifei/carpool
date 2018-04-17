@@ -1,5 +1,5 @@
 <template>
-  <transition name="page">
+
     <div class=" page-style">
       <x-header :left-options="{backText: ''}">{{title}}</x-header>
       <div class="page-content">
@@ -52,7 +52,7 @@
       </div>
       <disclaimer :is-show.sync="publishObj.disclaimer"></disclaimer>
     </div>
-  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">

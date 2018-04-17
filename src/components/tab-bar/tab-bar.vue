@@ -21,7 +21,7 @@
           {
             className: 'car-shouye',
             name: '首页',
-            to: '/'
+            to: '/home'
           },
           {
             className: 'car-wode4',

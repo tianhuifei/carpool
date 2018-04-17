@@ -1,5 +1,5 @@
 <template>
-  <transition name="page" mode="out-in">
+
     <div class="page-style">
       <x-header :left-options="{backText: ''}">详细信息</x-header>
       <div class="detail-main">
@@ -32,7 +32,7 @@
         </scroll>
       </div>
     </div>
-  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">

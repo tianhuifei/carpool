@@ -1,5 +1,5 @@
 <template>
-  <transition name="page">
+
     <div class="page-style">
       <x-header :left-options="{backText: ''}">我的发布</x-header>
       <div class="page-content">
@@ -39,7 +39,7 @@
 
       </div>
     </div>
-  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">

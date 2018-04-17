@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import App from '../App'
 import Router from 'vue-router'
 import Home from 'components/home/home'
 import Detail from 'components/detail/detail'
@@ -15,54 +16,63 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/personal',
-      name: 'personal',
-      component: PersonalCenter,
+      component: App,
       children: [
         {
-          path: 'mypublish',
-          component: MyPublish
+          path: '',
+          redirect: '/home'
         },
         {
-          path: 'about',
-          component: About,
-          meta: {title: '关于'},
+          path: '/home',
+          name: 'Home',
+          component: Home
+        }, {
+          path: '/personal',
+          name: 'personal',
+          component: PersonalCenter,
           children: [
             {
-              path: 'version',
-              component: Version,
-              meta: {title: '版本介绍'}
+              path: 'mypublish',
+              component: MyPublish
             },
             {
-              path: 'feedback',
-              component: FeedBack,
-              meta: {title: '意见反馈'}
-            },
-            {
-              path: 'contactme',
-              component: contactMe,
-              meta: {title: '联系我'}
+              path: 'about',
+              component: About,
+              meta: {title: '关于'},
+              children: [
+                {
+                  path: 'version',
+                  component: Version,
+                  meta: {title: '版本介绍'}
+                },
+                {
+                  path: 'feedback',
+                  component: FeedBack,
+                  meta: {title: '意见反馈'}
+                },
+                {
+                  path: 'contactme',
+                  component: contactMe,
+                  meta: {title: '联系我'}
+                }
+              ]
             }
           ]
+        },
+        {
+          path: '/detail/:id',
+          name: 'detail',
+          component: Detail
+        },
+        {
+          path: '/publish/:id/:type',
+          name: 'Publish',
+          components: {PublishEdit: PublishEdit},
+          meta: {
+            refresh: false
+          }
         }
       ]
-    },
-    {
-      path: '/detail/:id',
-      name: 'detail',
-      component: Detail
-    },
-    {
-      path: '/publish/:id/:type',
-      name: 'Publish',
-      components: {PublishEdit: PublishEdit},
-      meta: {
-        refresh: false
-      }
     }
   ]
 })

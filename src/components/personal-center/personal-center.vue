@@ -14,9 +14,11 @@
       </cell>
       <cell title="关于" is-link link="/personal/about"><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
     </group>
+    <transition name="router-fade">
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    </transition>
     <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
       <login :is-show.sync="loginDialog"></login>
     </x-dialog>

@@ -1,5 +1,5 @@
 <template>
-  <transition name="page">
+
     <div class="page-style">
       <x-header :transition="transitionName" :left-options="{backText: ''}">{{ title }}</x-header>
       <div class="page-content">
@@ -9,13 +9,13 @@
           <cell title="联系我" is-link link="/personal/about/contactme"></cell>
         </group>
       </div>
-      <transition :name="transitionName">
+      <transition name="router-fade">
         <keep-alive>
             <router-view class="child-view"></router-view>
         </keep-alive>
       </transition>
     </div>
-  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">

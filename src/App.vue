@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <keep-alive>
+    <transition name="router-fade">
+      <keep-alive>
         <router-view></router-view>
-    </keep-alive>
+      </keep-alive>
+    </transition>
+    <transition name="router-fade">
     <router-view name="PublishEdit"></router-view>
+    </transition>
     <tab-bar></tab-bar>
   </div>
 </template>
@@ -21,41 +25,20 @@
 </script>
 
 <style lang="scss">
-  .router-view {
-    width: 100%;
-    top: 46px;
+  /*.page-enter-active, .page-leave-active {*/
+    /*transition: all .3s*/
+  /*}*/
+
+  /*.page-enter, .page-leave-to !* .fade-leave-active in below version 2.1.8 *!*/
+  /*{*/
+    /*transform: translate3d(100%, 0, 0)*/
+  /*}*/
+  // 过场动画
+  .router-fade-enter-active, .router-fade-leave-active {
+    transition: opacity .3s;
   }
 
-  .vux-pop-out-enter-active,
-  .vux-pop-out-leave-active,
-  .vux-pop-in-enter-active,
-  .vux-pop-in-leave-active {
-    will-change: transform;
-    transition: all 500ms;
-    height: 100%;
-    top: 46px;
-    position: absolute;
-    backface-visibility: hidden;
-    perspective: 1000;
-  }
-
-  .vux-pop-out-enter {
+  .router-fade-enter, .router-fade-leave-active {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  .vux-pop-out-leave-active {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-
-  .vux-pop-in-enter {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-
-  .vux-pop-in-leave-active {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
   }
 </style>

@@ -35,16 +35,6 @@ body {
   right: 0;
 }
 
-// 过场动画
-.page-enter-active, .page-leave-active {
-  transition: all .3s
-}
-
-.page-enter, .page-leave-to /* .fade-leave-active in below version 2.1.8 */
-{
-  transform: translate3d(100%, 0, 0)
-}
-
 .text-white {
   color: $color-white !important;
 }
