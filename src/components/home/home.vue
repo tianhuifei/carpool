@@ -160,7 +160,6 @@
         }, 1500)
       },
       queryStartEnd() {
-        this.loading = true
         this.publishType = null
         this.apiType = 'startEnd'
         this.currentPageIndex = 0
@@ -182,6 +181,7 @@
           })
           return
         }
+        this.loading = true
         queryStartEndApi(this.startAddress, this.endAddress).then((res) => {
           this._normalizeResultList(res)
         }).catch(() => {
