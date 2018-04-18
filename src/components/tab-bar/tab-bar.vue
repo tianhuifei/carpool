@@ -21,7 +21,7 @@
           {
             className: 'car-shouye',
             name: '首页',
-            to: '/home'
+            to: '/'
           },
           {
             className: 'car-wode4',
@@ -46,7 +46,7 @@
     width:100%;
     display: flex;
     border-top:1px solid #EEE;
-    box-shadow: 0 0 1px rgba(0,0,0,.85);
+    box-shadow: 0 0 1px rgba(0,0,0,.25);
     .tab-item{
       flex: 1;
       >a{

@@ -1,14 +1,17 @@
 <template>
-  <div id="app">
-    <transition name="router-fade">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
-    <transition name="router-fade">
-    <router-view name="PublishEdit"></router-view>
-    </transition>
-    <tab-bar></tab-bar>
+  <div id="app" class="1">
+    <div class="2">
+      <transition name="router-fade">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
+      <transition name="router-fade">
+        <router-view name="PublishEdit"></router-view>
+      </transition>
+      <tab-bar class="test"></tab-bar>
+    </div>
+
   </div>
 </template>
 

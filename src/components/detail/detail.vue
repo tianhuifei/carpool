@@ -3,7 +3,7 @@
   <div class="page-style">
     <x-header :left-options="{backText: ''}">详细信息</x-header>
     <div class="detail-main">
-      <t-loading v-if="this.publishInfo"></t-loading>
+      <t-loading v-if="!this.publishInfo"></t-loading>
       <scroll>
         <div class="content-body">
           <group label-width="5.5em" label-margin-right="1em" label-align="right" v-if="publishInfo">
