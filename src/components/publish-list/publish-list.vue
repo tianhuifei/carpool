@@ -76,6 +76,9 @@
   @import "../../assets/css/base-standard";
 
   $b-color: #efefef;
+  .result-content{
+    position:relative;
+  }
   .result-item {
     position: relative;
     &:before, &:after {

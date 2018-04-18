@@ -34,7 +34,14 @@
         </div>
       </div>
       <!--查找，发布-->
-      <publish-list @selectPublish="select" :list="publishList"></publish-list>
+
+      <!-- 结果集列表 -->
+      <div class="result-box">
+        <t-loading v-show="loading"></t-loading>
+        <publish-list @selectPublish="select" :list="publishList"></publish-list>
+      </div>
+      <!-- 结果集列表 -->
+
     </scroll>
   </div>
 
@@ -48,16 +55,19 @@
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
   import {numsPerPage} from '../../api/config'
+  import TLoading from '../../base/T-loading/T-loading'
 
   export default {
     components: {
       Scroll,
       XButton,
       PublishList,
-      Swiper
+      Swiper,
+      TLoading
     },
     data() {
       return {
+        loading: false,
         publishList: [],
         startAddress: '',
         endAddress: '',
@@ -150,6 +160,7 @@
         }, 1500)
       },
       queryStartEnd() {
+        this.loading = true
         this.publishType = null
         this.apiType = 'startEnd'
         this.currentPageIndex = 0
@@ -175,9 +186,12 @@
           this._normalizeResultList(res)
         }).catch(() => {
           this._errorCommon()
+        }).finally(() => {
+          this.loading = false
         })
       },
       queryTypeList(type) {
+        this.loading = true
         this.publishType = type
         this.apiType = 'typeList'
         this.currentPageIndex = 0
@@ -189,6 +203,8 @@
           this._normalizeResultList(res)
         }).catch(() => {
           this._errorCommon()
+        }).finally(() => {
+          this.loading = false
         })
       },
       _normalizePublishInfo(list) {
@@ -291,4 +307,7 @@
     }
   }
 
+  .result-box {
+    position: relative;
+  }
 </style>

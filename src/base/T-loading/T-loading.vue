@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-box">
+  <div :class="{'position-abs':position === 'absolute','position-fixed':position === 'fixed'}" class="loading-box">
     <span class="loading-text" v-if="this.loadingText">{{loadingText}}</span>
     <inline-loading></inline-loading>
   </div>
@@ -18,6 +18,10 @@
       loadingText: {
         type: String,
         default: '加载中...'
+      },
+      position: {
+        type: String,
+        default: 'fixed'
       }
     }
   }
@@ -25,9 +29,14 @@
 
 <style scoped lang="scss">
   @import "../../assets/css/base-standard";
-
-  .loading-box {
+  .position-abs{
+    position: absolute;
+  }
+  .position-fixed{
     position: fixed;
+  }
+  .loading-box {
+    z-index: 20;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

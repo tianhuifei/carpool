@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="1">
-    <div class="2">
+  <div id="app" >
+
       <transition name="router-fade">
         <keep-alive>
           <router-view></router-view>
@@ -10,7 +10,6 @@
         <router-view name="PublishEdit"></router-view>
       </transition>
       <tab-bar class="test"></tab-bar>
-    </div>
 
   </div>
 </template>

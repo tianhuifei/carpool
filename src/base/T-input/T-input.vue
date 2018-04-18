@@ -16,7 +16,7 @@
   import {addClass, removeClass} from 'common/js/dom'
 
   export default {
-    name: 'input',
+    name: 'T-input',
     props: {
       value: [String, Number],
       type: {

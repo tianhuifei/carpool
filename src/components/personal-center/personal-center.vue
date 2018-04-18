@@ -20,7 +20,7 @@
     </keep-alive>
     </transition>
     <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
-      <login :is-show.sync="loginDialog"></login>
+      <t-login :is-show.sync="loginDialog"></t-login>
     </x-dialog>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script type="text/ecmascript-6">
   import {Group, Cell, XButton, XDialog} from 'vux'
   import {mapMutations, mapGetters} from 'vuex'
-  import Login from 'components/login/login'
+  import TLogin from 'components/login/login'
   import {getUserInfo} from '../../common/js/base'
 
   export default {
@@ -66,7 +66,7 @@
       Group,
       Cell,
       XButton,
-      Login,
+      TLogin,
       XDialog
     }
   }
