@@ -32,6 +32,12 @@ export const versionUrl = '/version/index/version_info'
 // 意见反馈url
 export const feedBackUrl = '/feedback/index/feedback'
 
+// 检测token信息
+export const checkTokenUrl = '/login/index/check_login'
+
+// 退出登录
+export const loginOutUrl = '/login/index/login_out'
+
 // 显示数量
 export const numsPerPage = 6
 

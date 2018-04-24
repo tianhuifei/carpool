@@ -103,6 +103,7 @@
               text: '登录成功',
               type: 'success'
             })
+            localStorage.setItem('t', res.data.result.token)
             setTimeout(() => {
               this.$emit('update:isShow', false)
               this.setUser(getUserInfo())

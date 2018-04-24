@@ -1,4 +1,5 @@
 import {getCookie} from './cookie'
+import {Base64} from 'js-base64'
 // export const ROOT_URL = 'https://www.tianhf.com'
 export const ROOT_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8360'
 
@@ -11,8 +12,11 @@ export function isType(value) {
  * @returns {*}
  */
 export function getUserInfo() {
-  let user = JSON.parse(localStorage.getItem('user')) || JSON.parse(getCookie('userInfo') ? getCookie('userInfo') : null)
-  return user
+  let reg = /\.(.+)\./
+  let user = localStorage.getItem('t') || (getCookie('t') ? getCookie('t') : null)
+  if (!user) return null
+  let regGroup = user.match(reg)
+  return JSON.parse(Base64.decode(regGroup[1]))
 }
 
 function formatNumber(n) {

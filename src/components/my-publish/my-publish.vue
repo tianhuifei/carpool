@@ -1,44 +1,44 @@
 <template>
 
-    <div class="page-style">
-      <x-header :left-options="{backText: ''}">我的发布</x-header>
-      <div class="page-content">
-        <scroll :data="list" ref="scroll" :pullUpLoad="pullUpLoadObj"
-                :pullDownRefresh="pullDownRefreshObj" @pullingDown="onPullingDown" @pullingUp="onPullingUp">
-          <div class="list-box">
-            <t-card :footer="true" v-for="(item, index) in list" :key="index">
-              <div class="card-content">
-                <div class="card-content-left">
-                  <div class="card-content-left-title">
-                    <p>{{item.startAddress}} - {{item.endAddres}}</p>
-                  </div>
-                  <div class="card-content-left-date">
-                    发布时间：<span>{{item.publishTime}}</span>
-                  </div>
+  <div class="page-style">
+    <x-header :left-options="{backText: ''}">我的发布</x-header>
+    <div class="page-content">
+      <scroll :data="list" ref="scroll" :pullUpLoad="pullUpLoadObj"
+              :pullDownRefresh="pullDownRefreshObj" @pullingDown="onPullingDown" @pullingUp="onPullingUp">
+        <div class="list-box">
+          <t-card :footer="true" v-for="(item, index) in list" :key="index">
+            <div class="card-content">
+              <div class="card-content-left">
+                <div class="card-content-left-title">
+                  <p>{{item.startAddress}} - {{item.endAddres}}</p>
                 </div>
-                <div class="card-content-right">
-                  <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
+                <div class="card-content-left-date">
+                  发布时间：<span>{{item.publishTime}}</span>
                 </div>
               </div>
-              <div class="card-btn-box" slot="footer">
-                <div>
-                  <x-button mini type="primary" :link="{ name: 'Publish', params: { id: item.publishId,type: 'edit' }}">
-                    编辑
-                  </x-button>
-                </div>
-                <div>
-                  <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
-                </div>
-                <div>
-                  <x-button @click.native="onDelete(item.publishId, index)"  mini type="warn">删除</x-button>
-                </div>
+              <div class="card-content-right">
+                <span :class="item.publishType ? 'people-for-car' : 'car-for-people'">{{ item.publishType ? "人找车" : "车找人" }}</span>
               </div>
-            </t-card>
-          </div>
-        </scroll>
+            </div>
+            <div class="card-btn-box" slot="footer">
+              <div>
+                <x-button mini type="primary" :link="{ name: 'Publish', params: { id: item.publishId,type: 'edit' }}">
+                  编辑
+                </x-button>
+              </div>
+              <div>
+                <x-button mini v-if="item.becomeDue" :disabled="item.becomeDue">已过期</x-button>
+              </div>
+              <div>
+                <x-button @click.native="onDelete(item.publishId, index)" mini type="warn">删除</x-button>
+              </div>
+            </div>
+          </t-card>
+        </div>
+      </scroll>
 
-      </div>
     </div>
+  </div>
 
 </template>
 
@@ -133,6 +133,7 @@
               type: 'warn',
               text: result.msg
             })
+            this.$refs.scroll.forceUpdate(true)
             return false
           }
           this._normalizeResultList(res)

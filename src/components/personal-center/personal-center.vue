@@ -1,6 +1,7 @@
 <template>
   <div class="body-main">
     <div class="my-header">
+      <a @click="_loginOut" v-if="this.user" href="javascript:void(0);" class="loginOut">退出</a>
       <p class="center portrait" v-if="user">
         <img :src="url" alt="">
         <span>{{ user.userName }}</span>
@@ -10,14 +11,16 @@
       </p>
     </div>
     <group gutter="5px">
-      <cell title="我的发布" is-link link="/personal/mypublish"><span slot="icon" class="carpoll car-fabu icon-color"></span>
+      <cell title="我的发布" is-link link="/personal/mypublish"><span slot="icon"
+                                                                  class="carpoll car-fabu icon-color"></span>
       </cell>
-      <cell title="关于" is-link link="/personal/about"><span slot="icon" class="carpoll car-guanyu icon-color"></span></cell>
+      <cell title="关于" is-link link="/personal/about"><span slot="icon" class="carpoll car-guanyu icon-color"></span>
+      </cell>
     </group>
     <transition name="router-fade">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </transition>
     <x-dialog class="login-box" :show.sync="loginDialog" hide-on-blur>
       <t-login :is-show.sync="loginDialog"></t-login>
@@ -30,12 +33,13 @@
   import {mapMutations, mapGetters} from 'vuex'
   import TLogin from 'components/login/login'
   import {getUserInfo} from '../../common/js/base'
+  import {loginOut} from '../../api/login/login'
 
   export default {
     name: 'personal-center',
     data() {
       return {
-        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
+        url: '/static/images/portrait.jpg',
         loginDialog: false
       }
     },
@@ -57,6 +61,16 @@
       },
       _getUser() {
         this.setUser(getUserInfo())
+      },
+      _loginOut() {
+        loginOut().then((res) => {
+          if (!res.data.result) {
+            return false
+          }
+          localStorage.setItem('t_f', false)
+          localStorage.removeItem('t')
+          this.setUser(null)
+        }).catch()
       },
       ...mapMutations({
         setUser: 'SET_USER'
@@ -83,6 +97,14 @@
     align-items: center;
     justify-items: center;
     background-color: $app-color;
+    .loginOut {
+      position: absolute;
+      padding: 10px;
+      top: 15px;
+      right: 15px;
+      font-size: $base-font-size;
+      color: $basic-font-color;
+    }
     .portrait {
       span {
         @include text-overflow();
