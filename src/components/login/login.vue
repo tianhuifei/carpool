@@ -32,12 +32,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import TInput from 'base/T-input/T-input'
   import {XButton} from 'vux'
   import {register, checkUser, loginSubMit} from '../../api/login/login'
   import {mapMutations} from 'vuex'
   import {getUserInfo} from '../../common/js/base'
   import _ from 'lodash'
+
+  const TInput = () => import('base/T-input/T-input.vue').then(m => m.default)
 
   export default {
     name: 'login',

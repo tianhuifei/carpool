@@ -48,14 +48,15 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Scroll from 'base/scroll/scroll'
   import {XButton, Swiper} from 'vux'
-  import PublishList from 'components/publish-list/publish-list'
   import {getQueryALl, queryStartEndApi, queryPublishType, pullUp} from '../../api/resultList'
   import {mapMutations} from 'vuex'
   import {createPublishInfo} from '../../common/js/publishInfo'
   import {numsPerPage} from '../../api/config'
-  import TLoading from '../../base/T-loading/T-loading'
+
+  const Scroll = () => import('base/scroll/scroll.vue').then(m => m.default)
+  const PublishList = () => import('components/publish-list/publish-list.vue').then(m => m.default)
+  const TLoading = () => import('../../base/T-loading/T-loading.vue').then(m => m.default)
 
   export default {
     components: {

@@ -38,10 +38,11 @@
 
 <script type="text/ecmascript-6">
   import {XHeader, Group, Cell, XTextarea} from 'vux'
-  import Scroll from '../../base/scroll/scroll'
   import {mapGetters} from 'vuex'
   import {queryDetail} from '../../api/detail/detail'
-  import TLoading from '../../base/T-loading/T-loading'
+
+  const TLoading = () => import('../../base/T-loading/T-loading.vue').then(m => m.default)
+  const Scroll = () => import('../../base/scroll/scroll.vue').then(m => m.default)
 
   export default {
     name: 'detail',
@@ -110,10 +111,12 @@
 
 <style scoped lang="scss">
   @import '../../assets/css/base-standard';
-  .weui-textarea{
+
+  .weui-textarea {
     font-size: $base-font-size;
-    color:$basic-font-color;
+    color: $basic-font-color;
   }
+
   .content-body {
     overflow: hidden;
   }

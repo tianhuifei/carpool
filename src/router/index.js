@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from 'components/home/home'
-import Detail from 'components/detail/detail'
-import PublishEdit from 'components/publish-edit/publish-edit'
-import PersonalCenter from 'components/personal-center/personal-center'
-import MyPublish from 'components/my-publish/my-publish'
-import Version from 'components/version/version'
-import FeedBack from 'components/feed-back/feed-back'
-import contactMe from 'components/contact-me/contact-me'
-import About from 'components/about/about'
+
+const Home = () => import('components/home/home')
+const Detail = () => import('components/detail/detail')
+const PublishEdit = () => import('components/publish-edit/publish-edit')
+const PersonalCenter = () => import('components/personal-center/personal-center')
+const MyPublish = () => import('components/my-publish/my-publish')
+const Version = () => import('components/version/version')
+const FeedBack = () => import('components/feed-back/feed-back')
+const contactMe = () => import('components/contact-me/contact-me')
+const About = () => import('components/about/about')
 
 Vue.use(Router)
 let router = new Router({

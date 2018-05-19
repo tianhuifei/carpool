@@ -57,10 +57,11 @@
 
 <script type="text/ecmascript-6">
   import {XHeader, Group, Cell, PopupPicker, XInput, Datetime, XTextarea, CheckIcon, XButton} from 'vux'
-  import Scroll from 'base/scroll/scroll'
   import {presentTime, addPublish, queryEdit, updateInfo} from '../../api/publish-edit'
-  import disclaimer from 'components/disclaimer/disclaimer'
   import {formatTime} from '../../common/js/base'
+
+  const Scroll = () => import('base/scroll/scroll.vue').then(m => m.default)
+  const disclaimer = () => import('components/disclaimer/disclaimer.vue').then(m => m.default)
 
   export default {
     name: 'publish-edit',

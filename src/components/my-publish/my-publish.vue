@@ -45,11 +45,12 @@
 <script type="text/ecmascript-6">
   import {XHeader, XButton} from 'vux'
   import {queryMyData, detailInfo} from '../../api/myPublish/myPublish'
-  import TCard from '../../base/T-card/T-card'
   import {createPublishInfo} from '../../common/js/publishInfo'
-  import Scroll from 'base/scroll/scroll'
   import {isType} from '../../common/js/base'
   import {numsPerPage} from '../../api/config'
+
+  const Scroll = () => import('base/scroll/scroll.vue').then(m => m.default)
+  const TCard = () => import('../../base/T-card/T-card.vue').then(m => m.default)
 
   export default {
     name: 'my-publish',

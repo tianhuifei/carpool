@@ -41,7 +41,8 @@
 
 <script type="text/ecmascript-6">
   import {XDialog} from 'vux'
-  import Scroll from 'base/scroll/scroll'
+
+  const Scroll = () => import('base/scroll/scroll.vue').then(m => m.default)
 
   export default {
     name: 'disclaimer',

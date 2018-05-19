@@ -31,9 +31,10 @@
 <script type="text/ecmascript-6">
   import {Group, Cell, XButton, XDialog} from 'vux'
   import {mapMutations, mapGetters} from 'vuex'
-  import TLogin from 'components/login/login'
   import {getUserInfo} from '../../common/js/base'
   import {loginOut} from '../../api/login/login'
+
+  const TLogin = () => import('components/login/login.vue').then(m => m.default)
 
   export default {
     name: 'personal-center',
