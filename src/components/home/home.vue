@@ -8,10 +8,10 @@
       <!-- 出发地，目的地 -->
       <div class="main-search-box">
         <div class="start-address">
-          <input placeholder="始发地" v-model="startAddress" type="text">
+          <input ref="startAddress" placeholder="始发地" v-model="startAddress" type="text">
         </div>
         <div class="end-address">
-          <input placeholder="目的地" v-model="endAddress" type="text">
+          <input ref="endAddress"  placeholder="目的地" v-model="endAddress" type="text">
         </div>
         <div class="search-btn-box" @click="queryStartEnd">
           搜索
@@ -161,6 +161,8 @@
         }, 1500)
       },
       queryStartEnd() {
+        this.$refs.startAddress.blur()
+        this.$refs.endAddress.blur()
         this.publishType = null
         this.apiType = 'startEnd'
         this.currentPageIndex = 0
