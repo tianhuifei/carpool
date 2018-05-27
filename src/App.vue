@@ -17,12 +17,10 @@
 <script type="text/ecmascript-6">
   import {checkToken} from './api/login/login'
 
-  const Home = () => import('components/home/home.vue').then(m => m.default)
   const TabBar = () => import('components/tab-bar/tab-bar.vue').then(m => m.default)
 
   export default {
     components: {
-      Home,
       TabBar
     },
     created() {
